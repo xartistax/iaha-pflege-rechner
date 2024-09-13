@@ -130,46 +130,52 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
         { label: 'Bruttolohn', value: results.field_261_Bruttolohn }
     ];
 
+    const sections = [
+        { section: 'Formular', items: rows.slice(0, 8), infoText: 'Reihenfolge der Positon im Dropdown! Beispiel: Geschlecht -> 0 = Männlich, 1 = Weiblich' },
+        { section: 'Kanton && KK', items: rows.slice(8, 11) },
+        { section: 'Körperpflege im Bett', items: rows.slice(11, 17) },
+        { section: 'Haare Waschen', items: rows.slice(17, 19) },
+        { section: 'Zahnpflege', items: rows.slice(19, 21) },
+        { section: 'Fingernägel', items: rows.slice(21, 23) },
+        { section: 'Zehnägel', items: rows.slice(23, 25) },
+        { section: 'Toilettengang', items: rows.slice(25, 27) },
+        { section: 'Intimpflege', items: rows.slice(27, 29) },
+        { section: 'Gehen und Stehen', items: rows.slice(29, 31) },
+        { section: 'Lagerung im Bett', items: rows.slice(31, 33) },
+        { section: 'Aufstehen und Hinlegen', items: rows.slice(33, 35) },
+        { section: 'An- und Ausziehen', items: rows.slice(35, 37) },
+        { section: 'Dekubitusprophylaxe', items: rows.slice(37, 39) },
+        { section: 'Unterstützung beim Essen und Trinken', items: rows.slice(39, 41) },
+        { section: 'Rasieren', items: rows.slice(41, 43) },
+        { section: 'Kompressionsstrümpfe', items: rows.slice(43, 45) },
+        { section: 'Summe Pflegeleistung im Durchschnitt Brutto', items: rows.slice(45, 46) },
+        { section: 'Korrektur', items: rows.slice(46, 51) },
+        { section: 'Summe Pflegeleistung im Durchschnitt Netto', items: rows.slice(51, 52) },
+        { section: 'Korrektur Faktor bei schwerer Demenz', items: rows.slice(52, 55) },
+        { section: 'Summe Durchschnittliche Pflegeleistungen', items: rows.slice(55, 58) },
+        { section: 'Definition Pflegezeiten', items: rows.slice(58, 60) },
+        { section: 'Bruttolohn', items: rows.slice(60, 61), infoText: 'Optional information about Bruttolohn section' }
+    ];
+
     return (
         <TableContainer component={Paper} elevation={0}>
             <Table>
-                
                 <TableBody>
-                    {[
-                        { section: 'Formular', items: rows.slice(0, 8) },
-                        { section: 'Kanton && KK', items: rows.slice(8, 11) },
-                        { section: 'Körperpflege im Bett', items: rows.slice(11, 17) },
-                        { section: 'Haare Waschen', items: rows.slice(17, 19) },
-                        { section: 'Zahnpflege', items: rows.slice(19, 21) },
-                        { section: 'Fingernägel', items: rows.slice(21, 23) },
-                        { section: 'Zehnägel', items: rows.slice(23, 25) },
-                        { section: 'Toilettengang', items: rows.slice(25, 27) },
-                        { section: 'Intimpflege', items: rows.slice(27, 29) },
-                        { section: 'Gehen und Stehen', items: rows.slice(29, 31) },
-                        { section: 'Lagerung im Bett', items: rows.slice(31, 33) },
-                        { section: 'Aufstehen und Hinlegen', items: rows.slice(33, 35) },
-                        { section: 'An- und Ausziehen', items: rows.slice(35, 37) },
-                        { section: 'Dekubitusprophylaxe', items: rows.slice(37, 39) },
-                        { section: 'Unterstützung beim Essen und Trinken', items: rows.slice(39, 41) },
-                        { section: 'Rasieren', items: rows.slice(41, 43) },
-                        { section: 'Kompressionsstrümpfe', items: rows.slice(43, 45) },
-                        { section: 'Summe Pflegeleistung im Durchschnitt Brutto', items: rows.slice(45, 46) },
-                        { section: 'Korrektur', items: rows.slice(46, 51) },
-                        { section: 'Summe Pflegeleistung im Durchschnitt Netto', items: rows.slice(51, 52) },
-                        { section: 'Korrektur Faktor bei schwerer Demenz', items: rows.slice(52, 55) },
-                        { section: 'Summe Durchschnittliche Pflegeleistungen', items: rows.slice(55, 58) },
-                        { section: 'Definition Pflegezeiten', items: rows.slice(58, 60) },
-                        { section: 'Bruttolohn', items: rows.slice(60, 61) }
-                    ].map((sectionData) => (
-                        <React.Fragment key={sectionData.section}>
+                    {sections.map(({ section, items, infoText }) => (
+                        <React.Fragment key={section}>
                             <TableRow>
                                 <TableCell colSpan={2}>
                                     <Typography variant="h6" component="div">
-                                        {sectionData.section}
+                                        {section}
                                     </Typography>
+                                    {infoText && (
+                                        <Typography variant="body2" color="textSecondary">
+                                            {infoText}
+                                        </Typography>
+                                    )}
                                 </TableCell>
                             </TableRow>
-                            {sectionData.items.map((row) => (
+                            {items.map((row) => (
                                 <TableRow key={row.label}>
                                     <TableCell>{row.label}</TableCell>
                                     <TableCell align="right">{row.value}</TableCell>
