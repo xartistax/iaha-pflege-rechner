@@ -24,10 +24,22 @@ export class PflegeRechnerFields {
         },
 
         calculationResults : {
+            
+            field_138_inkontinenz : "",
+            field_83_kognitive_probleme : "",
+            field_25_bewegungseinschraenkung : "",
+            field_139_kompressionsstrumpfe : "",
+            field_137_lage_aendern : "",
+            field_136_aufstehen_und_hinlegen : "",
+            field_23_geschlecht: "",
+            field_24_mobilitaet: "",
+            field_78_krankenkasse: "",
+	        field_76_kanton: "",
+
             field_246_kann_abgerechnet_werden: 0,
             field_153_koerperpflege_im_bett: "Nein",
-            field_184_pflegezeit_in_min_pro_tag_koerperpflege_im_bett: 0,
-            field_194_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bett: 0,
+            field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett: 0,
+            field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett: 0,
             field_143_Ganzwaesche_im_bad: "Nein",
             field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad: 0,
             field_152_teilwaesche_im_bad: "Nein",

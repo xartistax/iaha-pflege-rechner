@@ -1,8 +1,21 @@
 export interface CalculationResultsType {
+
+	field_138_inkontinenz : string,
+	field_83_kognitive_probleme : string,
+	field_25_bewegungseinschraenkung : string,
+	field_139_kompressionsstrumpfe : string,
+	field_137_lage_aendern : string,
+	field_136_aufstehen_und_hinlegen : string,
+	field_23_geschlecht: string,
+	field_24_mobilitaet: string,
+	field_78_krankenkasse: string,
+	field_76_kanton: string,
+
+
     field_246_kann_abgerechnet_werden: number;
     field_153_koerperpflege_im_bett: string;
-    field_184_pflegezeit_in_min_pro_tag_koerperpflege_im_bett: number;
-    field_194_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bett: number;
+    field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett: number; 
+    field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett: number;
     field_143_Ganzwaesche_im_bad: string;
     field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad: number;
     field_152_teilwaesche_im_bad: string;
@@ -74,7 +87,13 @@ export interface SurveyJSONType {
 	pages: Page[];
     showCompletedPage: boolean
 	showQuestionNumbers: string
+	pageNextText : LanguageText,
+	completeText : LanguageText
 }
+
+export interface LanguageText {
+	[languageCode: string]: string;
+  }
 
 export interface Page {
 	name: string;
@@ -324,5 +343,11 @@ export const surveyJson: SurveyJSONType = {
 	  }
 	],
 	"showCompletedPage": false,
-	"showQuestionNumbers": "off"
-  }   
+	"showQuestionNumbers": "off",
+	"pageNextText": {
+	  "de": "Weiter "
+	},
+	"completeText": {
+	  "de": "Berechnen"
+	}
+  }

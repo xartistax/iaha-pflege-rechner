@@ -28,3 +28,9 @@ a {
 .sd-page {
   padding: 1px !important;
 }
+
+
+
+.sd-body__navigation.sd-action-bar, .sd-body.sd-body--static .sd-body__navigation.sd-action-bar {
+  padding-left: unset !important;
+}
