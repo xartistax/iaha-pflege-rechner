@@ -18,6 +18,7 @@ function Home() {
     // State to track survey completion and store log data
     const [surveyCompleted, setSurveyCompleted] = useState(false);
     const [calculatedResults, setCalculatedResults] = useState<CalculationResultsType | null>(null);
+    const [isClient, setIsClient] = useState(false);
 
 
     survey.onComplete.add((sender: { data: SurveyResult; }, options: any) => {
@@ -35,8 +36,8 @@ function Home() {
 
 
     useEffect(() => {
-        console.log("RESULT: ", calculatedResults);
-    }, [calculatedResults])
+        setIsClient(true); // This triggers when the component mounts (on client-side)
+      }, []);
 
 
 
@@ -44,7 +45,7 @@ function Home() {
         <Container maxWidth="md" sx={{ mt: 3 , px: 20 }}>
             <Box>
                 {/* Render Survey */}
-                <Survey model={survey} />
+                {isClient && <Survey model={survey} />}
 
                 {/* Conditionally render the results table only after the survey is completed */}
                 {surveyCompleted && calculatedResults && (
