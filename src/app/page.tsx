@@ -42,16 +42,25 @@ function Home() {
 
 
     return (
-        <Container maxWidth="md" sx={{ mt: 3 , px: 20 }}>
+        <Container id="SurveyMain" maxWidth="md" sx={{ mt: 3  }}>
+            
             <Box>
                 {/* Render Survey */}
-                {isClient && <Survey model={survey} />}
+                {isClient && 
+
+                <>
+                <Typography variant="h2" gutterBottom>
+                            IAHA Pflegerechner
+                        </Typography>
+                        <Survey model={survey} />
+                </>
+                }
 
                 {/* Conditionally render the results table only after the survey is completed */}
                 {surveyCompleted && calculatedResults && (
-                    <Box mt={4} p={25}>
+                    <Box mt={4}>
                         <Typography variant="h6" gutterBottom>
-                            Survey Results 
+                            Resultate
                         </Typography>
                         <ResultsTable results={calculatedResults} />
                     </Box>

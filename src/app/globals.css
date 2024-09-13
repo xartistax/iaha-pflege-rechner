@@ -1,8 +1,4 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+
 
 html,
 body {
@@ -25,4 +21,10 @@ a {
   text-decoration: none;
 }
 
+.sd-body.sd-body--static {
+  margin: unset !important
+}
 
+.sd-page {
+  padding: 1px !important;
+}

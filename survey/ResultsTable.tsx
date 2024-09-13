@@ -69,7 +69,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
     
 
     return (
-        <TableContainer component={Paper} sx={{padding: 20}}>
+        <TableContainer component={Paper} elevation={0}>
             <Table>
                 <TableHead>
                     <TableRow>

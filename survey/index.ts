@@ -69,9 +69,11 @@ export interface SurveyResult {
 
 
 export interface SurveyJSONType {
+	locale: string;
 	logoPosition: string;
 	pages: Page[];
     showCompletedPage: boolean
+	showQuestionNumbers: string
 }
 
 export interface Page {
@@ -97,6 +99,7 @@ export interface ChoiceObject {
 }
 
 export const surveyJson: SurveyJSONType = {
+	"locale": "de",
 	"logoPosition": "right",
 	"pages": [
 	  {
@@ -320,5 +323,6 @@ export const surveyJson: SurveyJSONType = {
 		]
 	  }
 	],
-	"showCompletedPage": false
-  }
+	"showCompletedPage": false,
+	"showQuestionNumbers": "off"
+  }   
