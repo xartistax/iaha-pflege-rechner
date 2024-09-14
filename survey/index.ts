@@ -69,12 +69,12 @@ export interface CalculationResultsType {
 export interface SurveyResult {
     Geschlecht: string;
     Mobilität: string;
-    AufstehenHinlegen?: string;
-    LageÄndern?: string;
-    Kompressionsstrümpfe?: string;
-    Bewegungseinschränkung?: string;
+    AufstehenHinlegen: string;
+    LageÄndern: string;
+    Kompressionsstrümpfe: string;
+    Bewegungseinschränkung: string;
     KognitiveProbleme: string;
-    Inkontinenz?: string;
+    Inkontinenz: string;
     Kanton: string;
     Krankenkasse: string;
 }

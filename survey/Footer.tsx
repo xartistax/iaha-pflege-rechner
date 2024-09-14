@@ -10,7 +10,7 @@ export default function Footer () {
               component="footer"
               sx={{
                 py: 2,
-                mt: 'auto',
+                mt: 4,
                 backgroundColor: theme.palette.grey[100], // Light grey background
                 borderTop: `1px solid ${theme.palette.divider}`,
                 borderColor: theme.palette.grey[100]
