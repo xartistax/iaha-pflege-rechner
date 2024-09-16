@@ -56,15 +56,25 @@ export class PflegeRechnerCalculations {
 			PflegeRechnerFields.fields.calculationResults.field_246_kann_abgerechnet_werden = 0;
 		}
 
+
+		//// Körperpflege im Bett
+		//// IF(fieldname24=='3','Ja','Nein')
 		if (
 			mobilitaet === '3'
 
 		) {
 			PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett = 'Ja';
+
+			// Pflegezeit in Min pro Tag- Ganzwäsche im Bett
 			PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett = PflegeRechnerFields.fields.calculationFields.field_2_default_GanzwaescheBettlaegerigeKlientIn ;
+			
+			// Pflegezeit in Min pro Tag - Teilwäsche im Bett
 			PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett = PflegeRechnerFields.fields.calculationFields.field_4_TeilwaescheImBett
 
+			/// Ganzwäsche im Bad?
 			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Ja';
+
+			/// Pflegezeit in Min pro Tag - Ganzwäsche im Bad
 			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
 		}
 
@@ -84,179 +94,145 @@ export class PflegeRechnerCalculations {
 
 		}
 
-		if (
-			mobilitaet === '0' && aufstehenHinlegen === '0' ||
-			mobilitaet === '1' ||
-			mobilitaet === '2' ||
-			bewegungseinschraenkung === '0' ||
-			bewegungseinschraenkung === '1' ||
-			kognitiveProbleme === '1'
 
-		) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/// Haare waschen
+		if ( mobilitaet === '1' && aufstehenHinlegen === '1' || mobilitaet === '2' || mobilitaet === '3' || bewegungseinschraenkung === '1' || bewegungseinschraenkung === '2' || kognitiveProbleme === '2' ) {
+			// IF(fieldname174=='Ja',4.3333*fieldname6/30,0)
 			PflegeRechnerFields.fields.calculationResults.field_174_haare_waschen = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_196_pflegezeit_in_min_pro_tag_haare_waschen = 4.3333 * PflegeRechnerFields.fields.calculationFields.field_6_default_HaareWaschen / 30;
 
+			PflegeRechnerFields.fields.calculationResults.field_196_pflegezeit_in_min_pro_tag_haare_waschen = 
+			4.3333 * PflegeRechnerFields.fields.calculationFields.field_6_default_HaareWaschen / 30;
 		}
 
-		if (
-			mobilitaet === '2' ||
-			bewegungseinschraenkung === '0' ||
-			bewegungseinschraenkung === '1' ||
-			kognitiveProbleme === '1'
-
-		) {
+		/// Zahnpflege
+		if ( mobilitaet === '3' || bewegungseinschraenkung === '1' || bewegungseinschraenkung === '2' || kognitiveProbleme === '2' ) {
 			PflegeRechnerFields.fields.calculationResults.field_157_zahnpflege = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_197_pflegezeit_in_min_pro_tag_zahnpflege = 2 * PflegeRechnerFields.fields.calculationFields.field_9_default_TotalZahnpflege2xTaeglich;
 
+			PflegeRechnerFields.fields.calculationResults.field_197_pflegezeit_in_min_pro_tag_zahnpflege = 
+			2 * PflegeRechnerFields.fields.calculationFields.field_9_default_TotalZahnpflege2xTaeglich;
 		}
 
-		if (
-			(mobilitaet === '0' && aufstehenHinlegen === '0') ||
-			(mobilitaet === '1' && lageAendern === '0') ||
-			(mobilitaet === '2' && lageAendern === '0') ||
-			bewegungseinschraenkung === '0' ||
-			bewegungseinschraenkung === '1' ||
-			kognitiveProbleme === '1'
-
-		) {
+		/// Fingernägel
+		if ( (mobilitaet === '1' && aufstehenHinlegen === '1') || (mobilitaet === '2' && lageAendern === '1') || (mobilitaet === '3' && lageAendern === '1') || bewegungseinschraenkung === '1' || bewegungseinschraenkung === '2' || kognitiveProbleme === '2' ) {
 			PflegeRechnerFields.fields.calculationResults.field_210_Fingernaegel_schneiden = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_209_pflegezeit_in_min_pro_tag_Fingernaegel_schneiden = (PflegeRechnerFields.fields.calculationFields.field_7_default_FingernaegelSchneiden * 2) / 30;
 
-		}
+			PflegeRechnerFields.fields.calculationResults.field_209_pflegezeit_in_min_pro_tag_Fingernaegel_schneiden = 
+			(PflegeRechnerFields.fields.calculationFields.field_7_default_FingernaegelSchneiden * 2) / 30;}
 
-		if (
-			mobilitaet === '0' ||
-			mobilitaet === '1' ||
-			mobilitaet === '2' ||
-			bewegungseinschraenkung === '0' ||
-			bewegungseinschraenkung === '1' ||
-			kognitiveProbleme === '1'
-
-		) {
+		/// Zehnnägel
+		if ( mobilitaet === '1' || mobilitaet === '2' || mobilitaet === '3' || bewegungseinschraenkung === '1' || bewegungseinschraenkung === '2' || kognitiveProbleme === '2' ) {
 			PflegeRechnerFields.fields.calculationResults.field_161_Zehnaegel_schneiden = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_198_pflegezeit_in_min_pro_tag_Zehnaegel_schneiden = (PflegeRechnerFields.fields.calculationFields.field_8_default_FussnaegelSchneiden * 1) / 30;
 
-		}
+			PflegeRechnerFields.fields.calculationResults.field_198_pflegezeit_in_min_pro_tag_Zehnaegel_schneiden = 
+			(PflegeRechnerFields.fields.calculationFields.field_8_default_FussnaegelSchneiden * 1) / 30;}
 
-		if (
-			mobilitaet === '0' && aufstehenHinlegen === '0' ||
-			mobilitaet === '1' ||
-			bewegungseinschraenkung === '0' ||
-			bewegungseinschraenkung === '1' ||
-			kognitiveProbleme === '1'
-
-		) {
+		/// Begleitung Toilettengang
+		if ( mobilitaet === '1' && aufstehenHinlegen === '1' || mobilitaet === '2' || bewegungseinschraenkung === '1' || bewegungseinschraenkung === '2' || kognitiveProbleme === '2' ) {
 			PflegeRechnerFields.fields.calculationResults.field_165_Begleitung_Toilettengang = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_199_pflegezeit_in_min_pro_tag_Begleitung_Toilettengang = PflegeRechnerFields.fields.calculationFields.field_192_default_HilfeBeimToilettengang * 2;
+
+			PflegeRechnerFields.fields.calculationResults.field_199_pflegezeit_in_min_pro_tag_Begleitung_Toilettengang = 
+			PflegeRechnerFields.fields.calculationFields.field_192_default_HilfeBeimToilettengang * 2;
 
 		}
 
-		if (
-			(inkontinenz === '0' && mobilitaet === '1') ||
-			(inkontinenz === '1' && mobilitaet === '1') ||
-			(inkontinenz === '2' && mobilitaet === '1') ||
-			(inkontinenz === '0' && bewegungseinschraenkung === '0') ||
-			(inkontinenz === '1' && bewegungseinschraenkung === '0') ||
-			(inkontinenz === '2' && bewegungseinschraenkung === '0') ||
-			(inkontinenz === '0' && bewegungseinschraenkung === '1') ||
-			(inkontinenz === '1' && bewegungseinschraenkung === '1') ||
-			(inkontinenz === '2' && bewegungseinschraenkung === '1')
-
-		) {
+		/// Intimpflege
+		if ( (inkontinenz === '01' && mobilitaet === '2') || (inkontinenz === '2' && mobilitaet === '2') || (inkontinenz === '3' && mobilitaet === '2') || (inkontinenz === '1' && bewegungseinschraenkung === '1') || (inkontinenz === '2' && bewegungseinschraenkung === '1') || (inkontinenz === '3' && bewegungseinschraenkung === '1') || (inkontinenz === '1' && bewegungseinschraenkung === '1') || (inkontinenz === '1' && bewegungseinschraenkung === '2') || (inkontinenz === '3' && bewegungseinschraenkung === '2')) {
 			PflegeRechnerFields.fields.calculationResults.field_173_Intimpflege = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_200_pflegezeit_in_min_pro_tag_Intimpflege = PflegeRechnerFields.fields.calculationFields.field_5_default_IntimpflegeImBettOderAmLavabo ; 
+
+			PflegeRechnerFields.fields.calculationResults.field_200_pflegezeit_in_min_pro_tag_Intimpflege = 
+			PflegeRechnerFields.fields.calculationFields.field_5_default_IntimpflegeImBettOderAmLavabo ; 
 
 		}
 
-		if ( mobilitaet === '0' && aufstehenHinlegen === '0' ) {
+		/// Hilfe beim gehen und stehen
+		if ( mobilitaet === '1' && aufstehenHinlegen === '1' ) {
 
 			PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen = PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_201_pflegezeit_in_min_pro_tag_HilfeBeimGehenUndStehen = PflegeRechnerFields.fields.calculationFields.field_191_default_HilfeBeimGehenUndStehen * 2;
+
+			PflegeRechnerFields.fields.calculationResults.field_201_pflegezeit_in_min_pro_tag_HilfeBeimGehenUndStehen = 
+			PflegeRechnerFields.fields.calculationFields.field_191_default_HilfeBeimGehenUndStehen * 2;
 
 		}
 
-		if (
-			lageAendern === '0'
-
-		) {
+		/// Lagerung im Bett
+		if ( lageAendern === '1' ) {
 			PflegeRechnerFields.fields.calculationResults.field_167_LagerungImBett = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_202_pflegezeit_in_min_pro_tag_LagerungImBett = PflegeRechnerFields.fields.calculationFields.field_187_default_LagerungImBett * 3;
+			PflegeRechnerFields.fields.calculationResults.field_202_pflegezeit_in_min_pro_tag_LagerungImBett = 
+			PflegeRechnerFields.fields.calculationFields.field_187_default_LagerungImBett * 3;
 
 		}
 
-		if (
-			(mobilitaet === '0' && aufstehenHinlegen === '0') ||
-			(mobilitaet === '1' && lageAendern === '0') ||
-			(mobilitaet === '2' && lageAendern === '0')
-
-		) {
+		/// Hilfe beim aufstehen und hinlegen
+		if ( (mobilitaet === '1' && aufstehenHinlegen === '1') || (mobilitaet === '2' && lageAendern === '1') || (mobilitaet === '3' && lageAendern === '1') ) {
 			PflegeRechnerFields.fields.calculationResults.field_168_Hilfe_beim_Aufstehen_und_Hinlegen = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_203_pflegezeit_in_min_pro_tag_Hilfe_beim_Aufstehen_und_Hinlegen = PflegeRechnerFields.fields.calculationFields.field_186_default_AufstehenUndHinlegen * 2;
 
+			PflegeRechnerFields.fields.calculationResults.field_203_pflegezeit_in_min_pro_tag_Hilfe_beim_Aufstehen_und_Hinlegen = 
+			PflegeRechnerFields.fields.calculationFields.field_186_default_AufstehenUndHinlegen * 2;
 		}
 
 
 		
-		
-		if (
-			mobilitaet === '1' && aufstehenHinlegen === '1' || 
-			mobilitaet === '2' || 
-			mobilitaet === '3' && lageAendern === '0' || 
-			bewegungseinschraenkung === '1' || 
-			bewegungseinschraenkung === '2'
-		) {
-			
-		
+		/// Hilfe beim an- und ausziehen
+		if ( mobilitaet === '2' && aufstehenHinlegen === '2' ||  mobilitaet === '3' ||  mobilitaet === '4' && lageAendern === '1' || bewegungseinschraenkung === '2' || bewegungseinschraenkung === '3') {
 			
 			PflegeRechnerFields.fields.calculationResults.field_175_Hilfe_beim_Hilfe_beim_An_und_Ausziehen = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_204_pflegezeit_in_min_pro_tag_Hilfe_beim_Hilfe_beim_An_und_Ausziehen = PflegeRechnerFields.fields.calculationFields.field_185_default_AnUndAusziehen * 2;
+			PflegeRechnerFields.fields.calculationResults.field_204_pflegezeit_in_min_pro_tag_Hilfe_beim_Hilfe_beim_An_und_Ausziehen = 
+			PflegeRechnerFields.fields.calculationFields.field_185_default_AnUndAusziehen * 2;
 
 		}
 
-		if (
-			(mobilitaet === '1' && lageAendern === '0') ||
-			(mobilitaet === '2' && lageAendern === '0')
-
-		) 
-		
-	
-		
+		/// Dekubitusprophylaxe
+		if ( (mobilitaet === '2' && lageAendern === '1') || (mobilitaet === '3' && lageAendern === '1') ) 
 		{
 			PflegeRechnerFields.fields.calculationResults.field_169_Dekubitusprophylaxe = 'Ja';
 			PflegeRechnerFields.fields.calculationResults.field_205_pflegezeit_in_min_pro_tag_Dekubitusprophylaxe = PflegeRechnerFields.fields.calculationFields.field_188_default_Dekubitusprophylaxe ;
 
 		}
 
-		if (
-			bewegungseinschraenkung === '1' ||
-			kognitiveProbleme === '1'
-
-		) {
+		/// Unterstützung Essen und trinken
+		if ( bewegungseinschraenkung === '2' || kognitiveProbleme === '2' ) {
 			PflegeRechnerFields.fields.calculationResults.field_170_Unterstutzung_Essen_und_Trinken = 'Ja';
 			PflegeRechnerFields.fields.calculationResults.field_206_pflegezeit_in_min_pro_tag_Unterstutzung_Essen_und_Trinken = PflegeRechnerFields.fields.calculationFields.field_190_default_BeiEssenTrinkenUnterstuetzen * 2;
 
 		}
 
-		if (
-			(geschlecht === '0' && kognitiveProbleme === '1') ||
-			(geschlecht === '0' && bewegungseinschraenkung === '0') ||
-			(geschlecht === '0' && bewegungseinschraenkung === '1')
-
-		) {
+		/// Rasieren
+		if ( (geschlecht === '0' && kognitiveProbleme === '2') || (geschlecht === '0' && bewegungseinschraenkung === '1') || (geschlecht === '0' && bewegungseinschraenkung === '2') ) {
 			PflegeRechnerFields.fields.calculationResults.field_171_Rasieren = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_207_pflegezeit_in_min_pro_tag_Rasieren = (4 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_10_default_RasurInKombinationMitGanzOderTeilwaesche) / 30;
+			PflegeRechnerFields.fields.calculationResults.field_207_pflegezeit_in_min_pro_tag_Rasieren = 
+			(4 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_10_default_RasurInKombinationMitGanzOderTeilwaesche) / 30;
 
 		}
 
-		if (
-			kompressionsstrumpfe === '0'
-
-		) {
+		/// Kompressiumsstrümüfe
+		if ( kompressionsstrumpfe === '1' ) {
 			PflegeRechnerFields.fields.calculationResults.field_172_Kompressionsstrumpfe = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_208_pflegezeit_in_min_pro_tag_Kompressionsstrumpfe = 2 * PflegeRechnerFields.fields.calculationFields.field_189_default_KompressionsstruempfeOderVerband;
+			PflegeRechnerFields.fields.calculationResults.field_208_pflegezeit_in_min_pro_tag_Kompressionsstrumpfe = 
+			2 * PflegeRechnerFields.fields.calculationFields.field_189_default_KompressionsstruempfeOderVerband;
 
 		}
 
+		/// SUMMER Leistungen im Schnitt Brutto
 		PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_im_durchscnitt_brutto =
 			PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett +
 			PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett +
@@ -276,20 +252,24 @@ export class PflegeRechnerCalculations {
 			PflegeRechnerFields.fields.calculationResults.field_207_pflegezeit_in_min_pro_tag_Rasieren +
 			PflegeRechnerFields.fields.calculationResults.field_208_pflegezeit_in_min_pro_tag_Kompressionsstrumpfe;
 
-		if (PflegeRechnerFields.fields.calculationResults.field_165_Begleitung_Toilettengang === 'ja' && PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen === 'ja') {
+
+		
+		//Korrekturen
+
+		if (PflegeRechnerFields.fields.calculationResults.field_165_Begleitung_Toilettengang === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen === 'Ja') {
 			PflegeRechnerFields.fields.calculationResults.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen =
 				PflegeRechnerFields.fields.calculationResults.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen - PflegeRechnerFields.fields.calculationResults.field_201_pflegezeit_in_min_pro_tag_HilfeBeimGehenUndStehen;
 		}
 
-		if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'ja' && PflegeRechnerFields.fields.calculationResults.field_175_Hilfe_beim_Hilfe_beim_An_und_Ausziehen === 'ja') {
+		if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_175_Hilfe_beim_Hilfe_beim_An_und_Ausziehen === 'Ja') {
 			PflegeRechnerFields.fields.calculationResults.field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen = (2 * 4.3333 * PflegeRechnerFields.fields.calculationFields.field_185_default_AnUndAusziehen) / 30;
 		}
 
-		if (PflegeRechnerFields.fields.calculationResults.field_152_teilwaesche_im_bad === 'ja' && PflegeRechnerFields.fields.calculationResults.field_175_Hilfe_beim_Hilfe_beim_An_und_Ausziehen === 'ja') {
+		if (PflegeRechnerFields.fields.calculationResults.field_152_teilwaesche_im_bad === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_175_Hilfe_beim_Hilfe_beim_An_und_Ausziehen === 'Ja') {
 			PflegeRechnerFields.fields.calculationResults.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen = (5 * 4.3333 * PflegeRechnerFields.fields.calculationFields.field_185_default_AnUndAusziehen) / 30;
 		}
 
-		if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'ja' && PflegeRechnerFields.fields.calculationResults.field_172_Kompressionsstrumpfe === 'ja') {
+		if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_172_Kompressionsstrumpfe === 'Ja') {
 			PflegeRechnerFields.fields.calculationResults.field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe = (2 * 4.3333 * PflegeRechnerFields.fields.calculationFields.field_189_default_KompressionsstruempfeOderVerband) / 30;
 		}
 

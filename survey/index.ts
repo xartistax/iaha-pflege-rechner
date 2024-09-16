@@ -208,11 +208,11 @@ export const surveyJson: SurveyJSONType = {
 			"choices": [
 			  {
 				"value": "0",
-				"text": "Ja"
+				"text": "Nein"
 			  },
 			  {
 				"value": "1",
-				"text": "Nein"
+				"text": "Ja"
 			  }
 			],
 			"placeholder": "bitte auswählen"
