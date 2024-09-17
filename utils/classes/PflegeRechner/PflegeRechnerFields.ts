@@ -35,8 +35,8 @@ export class PflegeRechnerFields {
             field_24_mobilitaet: "",
             field_78_krankenkasse: "",
 	        field_76_kanton: "",
-
-            field_246_kann_abgerechnet_werden: 0,
+            field_999_krankenkasse_kann_abgerechnet_werden: "Nein",
+            field_246_kanton_kann_abgerechnet_werden: "Nein",
             field_153_koerperpflege_im_bett: "Nein",
             field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett: 0,
             field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett: 0,
@@ -87,7 +87,15 @@ export class PflegeRechnerFields {
             field_212_Summe_durchschnittliche_Pflegeleistungen_in_Stunden_pro_Tag : 0,
             field_259_Definition_unterer_Bereich_Pflegezeiten : 0,
             field_260_Definition_oberer_Bereich_Pflegezeiten : 0,
-            field_261_Bruttolohn : 0
+            field_261_Bruttolohn : 0,
+
+
+
+        salutation : "", 
+		vorname: "",
+		nachname : "",
+		phone : "",
+		email : "",
         }
     };
 

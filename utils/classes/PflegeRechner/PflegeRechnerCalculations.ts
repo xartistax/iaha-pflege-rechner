@@ -1,6 +1,11 @@
 import { SurveyResult } from '../../../survey'; 
 import { PflegeRechnerFields } from './PflegeRechnerFields';
 
+
+interface Lookup {
+	[key: string]: string;
+  }
+
 export class PflegeRechnerCalculations {
 
 	static iahaCalculation (data: SurveyResult) {
@@ -15,46 +20,131 @@ export class PflegeRechnerCalculations {
 		const kanton = data['Kanton'] as string; 
 		const krankenkasse = data['Krankenkasse'] as string; 
 
+		const salutation = data['anrede'] as string; 
+		const firstName = data['vorname'] as string; 
+		const lastName = data['nachname'] as string; 
+		const phone = data['phone'] as string; 
+		const email = data['email'] as string; 
+
+
+
+// 		anrede
+// : 
+// "Frau"
+// email
+// : 
+// "demianfueglistaler@icloud.com"
+// nachname
+// : 
+// "Füglistaler"
+// phone
+// : 
+// "0788888888"
+// vorname
+// : 
+// "Demian"
+// 		console.log(data)
+
+
+		const krrankenkassenAbgerechnetJa = ["Assura", "Atupri", "CSS", "Helsana", "KPT", "Sanitas", "Swica"];
+		const kantonAbgerechnetJa = ['Aargau', 'Appenzell A.Rh.', 'Basel-Landschaft', 'Basel-Stadt', 'Bern', 'Graubünden', 'Glarus', 'Luzern', 'Nidwalden', 'Obwalden', 'Sankt Gallen', 'Schaffhausen', 'Solothurn', 'Schwyz', 'Uri', 'Wallis', 'Zug', 'Zürich'];
+
+		const mobilitaetLookup : Lookup = {
+			"0": "keine Einschränkung der Gehfähigkeit",
+			"1": "Gangunsicher oder benutzt Rollator",
+			"2": "ist auf einen Rollstuhl angewiesen",
+			"3": "ist bettlägerig"
+		  };
+		  
+		  const aufstehenHinlegenLookup : Lookup = {
+			"0": "Aufstehen & Hinlegen ist selbständig möglich",
+			"1": "ist auf Hilfe beim Aufstehen & Hinlegen angewiesen"
+		  };
+		  
+		  const lageAendernLookup : Lookup = {
+			"0": "Die Person kann ihre Lage und Position / Lage selbst verändern",
+			"1": "Die Person ist für die Lageänderung auf Hilfe angewiesen"
+		  };
+		  
+		  const kompressionsstrumpfeLookup : Lookup = {
+			"0": "Ja",
+			"1": "Nein"
+		  };
+		  
+		  const bewegungseinschraenkungLookup : Lookup = {
+			"0": "keine Einschränkung der Bewegung des Oberkörpers und/oder der Arme/Hände",
+			"1": "es bestehen Einschränkungen bei der Bewegung des Oberkörpers und/oder der Arme/Hände",
+			"2": "schwerste Einschränkungen des Oberkörpers und/oder der Arme/Hände (z.B. Tetraplegiker)"
+		  };
+		  
+		  const kognitiveProblemeLookup : Lookup = {
+			"0": "keine kognitiven Einschränkungen",
+			"1": "leichte Form der Demenz",
+			"2": "schwere Form der Demenz"
+		  };
+		  
+		  const inkontinenzLookup : Lookup = {
+			"0": "keine Inkontinenz",
+			"1": "Urin-Inkontinenz",
+			"2": "Stuhl-Inkontinenz",
+			"3": "beides"
+		  };
+
+
+		  const geschlechtLookup : Lookup = {
+			"0": "Männlich",
+			"1": "Weiblich",
+		  };
+
+
+		  	const mobilitaetText = mobilitaetLookup[mobilitaet] || 'Unbekannt';
+			const bewegungseinschraenkungText = bewegungseinschraenkungLookup[bewegungseinschraenkung] || 'Unbekannt';
+			const kognitiveProblemeText = kognitiveProblemeLookup[kognitiveProbleme] || 'Unbekannt';
+			const aufstehenHinlegenText = aufstehenHinlegenLookup[aufstehenHinlegen] || 'Unbekannt';
+			const lageAendernText = lageAendernLookup[lageAendern] || 'Unbekannt';
+			const inkontinenzText = inkontinenzLookup[inkontinenz] || 'Unbekannt';
+			const kompressionsText = kompressionsstrumpfeLookup[kompressionsstrumpfe] || 'Unbekannt';
+			const geschlechtText = geschlechtLookup[geschlecht] || 'Unbekannt';
+		  
+       
+
+		
+
 
 		/// Directly Mapp KK And Kanton
 		PflegeRechnerFields.fields.calculationResults.field_76_kanton = kanton
 		PflegeRechnerFields.fields.calculationResults.field_78_krankenkasse = krankenkasse
-		PflegeRechnerFields.fields.calculationResults.field_24_mobilitaet = mobilitaet
-		PflegeRechnerFields.fields.calculationResults.field_25_bewegungseinschraenkung = bewegungseinschraenkung
-		PflegeRechnerFields.fields.calculationResults.field_83_kognitive_probleme = kognitiveProbleme
-		PflegeRechnerFields.fields.calculationResults.field_136_aufstehen_und_hinlegen = aufstehenHinlegen
-		PflegeRechnerFields.fields.calculationResults.field_137_lage_aendern = lageAendern
-		PflegeRechnerFields.fields.calculationResults.field_138_inkontinenz = inkontinenz
-		PflegeRechnerFields.fields.calculationResults.field_23_geschlecht = geschlecht
-		PflegeRechnerFields.fields.calculationResults.field_139_kompressionsstrumpfe = kompressionsstrumpfe
+		PflegeRechnerFields.fields.calculationResults.field_24_mobilitaet = mobilitaetText
+		PflegeRechnerFields.fields.calculationResults.field_25_bewegungseinschraenkung = bewegungseinschraenkungText
+		PflegeRechnerFields.fields.calculationResults.field_83_kognitive_probleme = kognitiveProblemeText
+		PflegeRechnerFields.fields.calculationResults.field_136_aufstehen_und_hinlegen = aufstehenHinlegenText
+		PflegeRechnerFields.fields.calculationResults.field_137_lage_aendern = lageAendernText
+		PflegeRechnerFields.fields.calculationResults.field_138_inkontinenz = inkontinenzText
+		PflegeRechnerFields.fields.calculationResults.field_23_geschlecht = geschlechtText
+		PflegeRechnerFields.fields.calculationResults.field_139_kompressionsstrumpfe = kompressionsText
 
 
+		PflegeRechnerFields.fields.calculationResults.salutation = salutation
+		PflegeRechnerFields.fields.calculationResults.vorname = firstName
+		PflegeRechnerFields.fields.calculationResults.nachname = lastName
+		PflegeRechnerFields.fields.calculationResults.phone = phone
+		PflegeRechnerFields.fields.calculationResults.email = email
+		
 
 
-		if (
-			kanton == 'Aargau' ||
-			kanton == 'Appenzell A.Rh.' ||
-			kanton == 'Basel-Landschaft' ||
-			kanton == 'Basel-Stadt' ||
-			kanton == 'Bern' ||
-			kanton == 'Graubünden' ||
-			kanton == 'Glarus' ||
-			kanton == 'Luzern' ||
-			kanton == 'Nidwalden' ||
-			kanton == 'Obwalden' ||
-			kanton == 'Sankt Gallen' ||
-			kanton == 'Schaffhausen' ||
-			kanton == 'Solothurn' ||
-			kanton == 'Schwyz' ||
-			kanton == 'Uri' ||
-			kanton == 'Wallis' ||
-			kanton == 'Zug' ||
-			kanton == 'Zürich'
-		) {
-			PflegeRechnerFields.fields.calculationResults.field_246_kann_abgerechnet_werden = 1;
-		} else if (kanton == 'Appenzell I.Rh.' || kanton == 'Freiburg' || kanton == 'Genf' || kanton == 'Jura' || kanton == 'Neuenburg' || kanton == 'Thurgau' || kanton == 'Tessin' || kanton == 'Waadt') {
-			PflegeRechnerFields.fields.calculationResults.field_246_kann_abgerechnet_werden = 0;
+		if (krrankenkassenAbgerechnetJa.includes(krankenkasse)) {
+			PflegeRechnerFields.fields.calculationResults.field_999_krankenkasse_kann_abgerechnet_werden = "Ja";
 		}
+
+
+		if (kantonAbgerechnetJa.includes(kanton)) {
+			PflegeRechnerFields.fields.calculationResults.field_246_kanton_kann_abgerechnet_werden = "Ja";
+		  } 
+
+
+
+
+		
 
 
 		//// Körperpflege im Bett
@@ -326,7 +416,7 @@ export class PflegeRechnerCalculations {
 			PflegeRechnerFields.fields.calculationResults.field_218_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag = Math.round(PflegeRechnerFields.fields.calculationResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten);
 		}
 
-		if (PflegeRechnerFields.fields.calculationResults.field_246_kann_abgerechnet_werden === 1) {
+		if (PflegeRechnerFields.fields.calculationResults.field_246_kanton_kann_abgerechnet_werden === "Ja") {
 			PflegeRechnerFields.fields.calculationResults.field_212_Summe_durchschnittliche_Pflegeleistungen_in_Stunden_pro_Tag = parseFloat((PflegeRechnerFields.fields.calculationResults.field_218_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag / 60).toFixed(2));
 		}
 

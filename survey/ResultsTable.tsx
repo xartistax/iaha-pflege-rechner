@@ -21,7 +21,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
         // Kanton Abgerechnet
         { label: 'Kanton', value: results.field_76_kanton },
         { label: 'Krankenkasse', value: results.field_78_krankenkasse },
-        { label: 'Kanton Abrechnung möglich (0 = Nein, 1 = Ja)', value: results.field_246_kann_abgerechnet_werden },
+        { label: 'Kanton Abrechnung möglich (0 = Nein, 1 = Ja)', value: results.field_246_kanton_kann_abgerechnet_werden },
+        { label: 'Krankenkasse Abrechnung möglich (0 = Nein, 1 = Ja)', value: results.field_999_krankenkasse_kann_abgerechnet_werden },
 
         // Körperpflege im Bett
         { label: 'Körperpflege im Bett', value: results.field_153_koerperpflege_im_bett },

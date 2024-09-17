@@ -12,7 +12,8 @@ export interface CalculationResultsType {
 	field_76_kanton: string,
 
 
-    field_246_kann_abgerechnet_werden: number;
+	field_999_krankenkasse_kann_abgerechnet_werden: string;
+    field_246_kanton_kann_abgerechnet_werden: string;
     field_153_koerperpflege_im_bett: string;
     field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett: number; 
     field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett: number;
@@ -64,6 +65,11 @@ export interface CalculationResultsType {
     field_259_Definition_unterer_Bereich_Pflegezeiten: number;
     field_260_Definition_oberer_Bereich_Pflegezeiten: number;
     field_261_Bruttolohn: number;
+	salutation : string; 
+	vorname: string;
+	nachname : string;
+	phone : string;
+	email : string;
 }
 // Type that matches the structure of the survey result
 export interface SurveyResult {
@@ -77,7 +83,44 @@ export interface SurveyResult {
     Inkontinenz?: string;
     Kanton: string;
     Krankenkasse: string;
+	anrede: string;
+	vorname: string;
+	nachname: string;
+	phone: string;
+	email: string
+
 }
+
+
+export type Element = DropdownElement | TextElement | CheckboxElement | RadioGroupElement; // Extend this with other possible element types if needed
+
+export interface TextElement {
+  type: 'text';
+  name: string;
+  title: LanguageText;
+  isRequired: boolean;
+  inputType?: 'text' | 'tel' | 'email'; // Add other input types if needed
+}
+
+export interface CheckboxElement {
+  type: 'checkbox';
+  name: string;
+  title: LanguageText;
+  isRequired: boolean;
+  choices: Array<ChoiceObject>;
+}
+
+
+
+export interface RadioGroupElement {
+	type: 'radiogroup';
+	name: string;
+	title: LanguageText;
+	isRequired: boolean;
+	choices: Array<ChoiceObjectAlt>;
+  }
+  
+
 
 
 
@@ -97,10 +140,11 @@ export interface LanguageText {
 
 export interface Page {
 	name: string;
+	title?: { de: string };
 	elements: Element[];
 }
 
-export type Element = DropdownElement; // Extend this with other possible element types if needed
+
 
 export interface DropdownElement {
 	type: 'dropdown';
@@ -115,6 +159,11 @@ export interface DropdownElement {
 export interface ChoiceObject {
 	value: string;
 	text: string;
+}
+
+export interface ChoiceObjectAlt {
+	value: string;
+	text: LanguageText;
 }
 
 export const surveyJson: SurveyJSONType = {
@@ -338,6 +387,70 @@ export const surveyJson: SurveyJSONType = {
 			  "SONSTIGE"
 			],
 			"placeholder": "bitte auswählen"
+		  }
+		]
+	  },
+	  {
+		"name": "page2",
+		"title": {
+		  "de": "Kontaktangaben"
+		},
+		"elements": [
+		  {
+			"type": "radiogroup",
+			"name": "anrede",
+			"title": {
+			  "de": "Anrede"
+			},
+			"isRequired": true,
+			"choices": [
+			  {
+				"value": "Frau",
+				"text": {
+				  "de": "Frau"
+				}
+			  },
+			  {
+				"value": "Herr",
+				"text": {
+				  "de": "Herr"
+				}
+			  }
+			]
+		  },
+		  {
+			"type": "text",
+			"name": "vorname",
+			"title": {
+			  "de": "Vorname\n"
+			},
+			"isRequired": true
+		  },
+		  {
+			"type": "text",
+			"name": "nachname",
+			"title": {
+			  "de": "Nachname\n"
+			},
+			"isRequired": true
+		  },
+		  {
+			"type": "text",
+			"name": "phone",
+			"title": {
+			  "de": "Geben Sie hier bitte eine Rückrufnummer an.\n"
+			},
+			"isRequired": true,
+			"inputType": "tel"
+		  },
+		  {
+			"type": "text",
+			"name": "email",
+			"title": {
+			  "de": "Ihre Email-Adresse"
+			},
+			"isRequired": true,
+			"inputType": "email"
 		  }
 		]
 	  }
