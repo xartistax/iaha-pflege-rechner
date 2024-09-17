@@ -18,11 +18,11 @@ export async function POST(req : Request, res : Response) {
         client_secret: process.env.NEXT_PUBLIC_ZOHO_CLIENT_SECRET!,
         redirect_uri: process.env.NEXT_PUBLIC_ZOHO_REDIRECT_URI!,
         grant_type: 'refresh_token',
-        refresh_token: process.env.NEXT_PUBLIC_ZOHO_REFRESH_TOKEN!
+        refresh_token: "1000.b2b4a5964a945ebde6185f2f6b8671ae.e18ab8535dc522216ca995502d4c5f5a"
       });
 
 
-      console.log(params)
+  
   
       // Make the POST request to the Zoho OAuth API
       const response = await fetch(`${url}?${params.toString()}`, {
@@ -39,7 +39,6 @@ export async function POST(req : Request, res : Response) {
       }
   
       const data = await response.json();
-      console.log(data)
       return NextResponse.json(data, { status: 200 });
     } catch (error) {
       console.error('Error fetching Zoho token:', error);
