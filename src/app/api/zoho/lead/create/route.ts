@@ -54,7 +54,7 @@ export async function POST(req : Request, res : Response) {
       return NextResponse.json(data, { status: 200 });
     } catch (error) {
       console.error('Error fetching Zoho token:', error);
-      return NextResponse.json({ error: 'Failed to fetch Zoho token' }, { status: 500 });
+      return NextResponse.json({ error: 'Failed to fetch Zoho token trying to create' }, { status: 500 });
     }
   }
   
