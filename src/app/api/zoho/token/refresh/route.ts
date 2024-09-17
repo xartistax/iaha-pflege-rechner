@@ -18,7 +18,7 @@ export async function POST(req : Request, res : Response) {
         client_secret: process.env.NEXT_PUBLIC_ZOHO_CLIENT_SECRET!,
         redirect_uri: process.env.NEXT_PUBLIC_ZOHO_REDIRECT_URI!,
         grant_type: 'refresh_token',
-        refresh_token: "1000.b2b4a5964a945ebde6185f2f6b8671ae.e18ab8535dc522216ca995502d4c5f5a"
+        refresh_token: process.env.NEXT_PUBLIC_ZOHO_REFRESH_TOKEN!
       });
 
 
