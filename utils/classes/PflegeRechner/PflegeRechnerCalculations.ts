@@ -156,18 +156,27 @@ export class PflegeRechnerCalculations {
 			PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett = 'Ja';
 
 			// Pflegezeit in Min pro Tag- Ganzwäsche im Bett
-			PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett = PflegeRechnerFields.fields.calculationFields.field_2_default_GanzwaescheBettlaegerigeKlientIn ;
+			// PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett = PflegeRechnerFields.fields.calculationFields.field_2_default_GanzwaescheBettlaegerigeKlientIn ;
 			
 			// Pflegezeit in Min pro Tag - Teilwäsche im Bett
-			PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett = PflegeRechnerFields.fields.calculationFields.field_4_TeilwaescheImBett
+			// PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett = PflegeRechnerFields.fields.calculationFields.field_4_TeilwaescheImBett
 
 			/// Ganzwäsche im Bad?
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Ja';
+			// PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Ja';
 
 			/// Pflegezeit in Min pro Tag - Ganzwäsche im Bad
-			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
+			// PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
 		}
 
+
+
+
+		/// Ganzwäsche im Bad
+		if (PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja') {
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja"
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
+		  } 
+		
 
 	
 

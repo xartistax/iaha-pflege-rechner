@@ -16,6 +16,11 @@ export async function POST(req : Request, res : Response) {
         method: 'POST',
       });
 
+
+      console.log(tokenResponse)
+
+    
+
       if (!tokenResponse.ok) {
         return NextResponse.json({ error: 'Failed to refresh Zoho token' }, { status: 500 });
       }

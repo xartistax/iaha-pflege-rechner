@@ -149,11 +149,13 @@ export interface Page {
 export interface DropdownElement {
 	type: 'dropdown';
 	name: string;
-	title: string;
+	title?: string | LanguageText;
 	isRequired: boolean;
 	choices: Array<string | ChoiceObject>;
 	placeholder: string;
+	visible?: boolean;
 	visibleIf?: string;
+	clearIfInvisible?: string
 }
 
 export interface ChoiceObject {
@@ -176,7 +178,10 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "Geschlecht",
-			"title": "Bitte geben Sie das Geschlecht der pflegebedürftigen Person an",
+			"title": {
+			  "default": "Bitte geben Sie das Geschlecht der pflegebedürftigen Person an",
+			  "de": "23_Bitte geben Sie das Geschlecht der pflegebedürftigen Person an"
+			},
 			"isRequired": true,
 			"choices": [
 			  {
@@ -193,7 +198,12 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "Mobilität",
-			"title": "Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?",
+			"visibleIf": "{Geschlecht} notempty",
+			"title": {
+			  "default": "Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?",
+			  "de": "24_Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?"
+			},
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  {
@@ -218,7 +228,13 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "AufstehenHinlegen",
-			"title": "Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?",
+			"visible": false,
+			"visibleIf": "{Mobilität} = 1",
+			"title": {
+			  "default": "Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?",
+			  "de": "136_Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?"
+			},
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  {
@@ -235,7 +251,13 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "LageÄndern",
-			"title": "Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?",
+			"visible": false,
+			"visibleIf": "{Mobilität} = 2 or {Mobilität} = 3",
+			"title": {
+			  "default": "Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?",
+			  "de": "137_Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?"
+			},
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  {
@@ -252,7 +274,13 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "Kompressionsstrümpfe",
-			"title": "Benutzt die pflegebedürftige Person Kompressionsstrümpfe?",
+			"visible": false,
+			"visibleIf": "{Mobilität} = 0 or {AufstehenHinlegen} notempty or {LageÄndern} notempty",
+			"title": {
+			  "default": "Benutzt die pflegebedürftige Person Kompressionsstrümpfe?",
+			  "de": "139_Benutzt die pflegebedürftige Person Kompressionsstrümpfe?"
+			},
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  {
@@ -269,7 +297,13 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "Bewegungseinschränkung",
-			"title": "Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?",
+			"visible": false,
+			"visibleIf": "{Kompressionsstrümpfe} notempty",
+			"title": {
+			  "default": "Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?",
+			  "de": "25_Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?"
+			},
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  {
@@ -290,7 +324,13 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "KognitiveProbleme",
-			"title": "Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?",
+			"visible": false,
+			"visibleIf": "{Bewegungseinschränkung} notempty",
+			"title": {
+			  "default": "Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?",
+			  "de": "83_Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?"
+			},
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  {
@@ -311,7 +351,13 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "Inkontinenz",
-			"title": "Leidet die pflegebedürftige Person unter Inkontinenz?",
+			"visible": false,
+			"visibleIf": "{KognitiveProbleme} notempty",
+			"title": {
+			  "default": "Leidet die pflegebedürftige Person unter Inkontinenz?",
+			  "de": "138_Leidet die pflegebedürftige Person unter Inkontinenz?"
+			},
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  {
@@ -336,7 +382,9 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "Kanton",
+			"visible": false,
 			"title": "In welchem Kanton lebt die pflegebedürftige Person?",
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  "Aargau",
@@ -371,7 +419,9 @@ export const surveyJson: SurveyJSONType = {
 		  {
 			"type": "dropdown",
 			"name": "Krankenkasse",
+			"visible": false,
 			"title": "Bei welcher Krankenkasse ist die pflegebedürftige Person grundversichert?",
+			"clearIfInvisible": "onHidden",
 			"isRequired": true,
 			"choices": [
 			  "Assura",
