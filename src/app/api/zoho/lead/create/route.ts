@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
 
         console.log('Fetching token from:', tokenRefreshUrl);
         
-        const tokenResponse = await fetch(tokenRefreshUrl, {
+        const tokenResponse = await fetch(tokenRefreshUrl , {
             method: 'POST',
         });
 
