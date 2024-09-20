@@ -126,6 +126,7 @@ function Home() {
                                     "Bruttolohn" : String(calculatedResults.field_261_Bruttolohn),
                                     "Kanton_abrechnung": String(calculatedResults.field_246_kanton_kann_abgerechnet_werden),
                                     "Krankenkasse_abrechnung": String(calculatedResults.field_999_krankenkasse_kann_abgerechnet_werden),
+                                    "Kognitive_Probleme" : String(calculatedResults.field_83_kognitive_probleme)
                             
                                 
                     
