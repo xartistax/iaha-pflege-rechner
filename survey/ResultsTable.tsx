@@ -99,7 +99,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
                 { label: 'Teilwäsche + An- & Ausziehen', value: results.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen },
                 { label: 'Korrektur-Faktor bei schwerer Demenz - Gehfähigkeit', value: results.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit },
                 { label: 'Korrektur-Faktor bei schwerer Demenz - Rumpf & Arme', value: results.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme },
-                { label: 'Ergebnis: Demenz-Korrektur-Faktor (1.1 = Zeit-Zuschlag, 0.7 = Zeit-Abzug): 1', value: results.field_178_Ergebnis_KorrekturFaktor_Demenz },
+                { label: 'Ergebnis: Demenz-Korrektur-Faktor (1.1 = Zeit-Zuschlag, 0.7  = Zeit-Abzug): 1', value: results.field_178_Ergebnis_KorrekturFaktor_Demenz },
                
 
             ]
