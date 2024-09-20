@@ -13,12 +13,16 @@ import { Container, Box, Typography } from "@mui/material";
 function Home() {
     const survey = new Model(surveyJson);
     survey.applyTheme(PlainLightPanelless);
+    
 
     // State to track survey completion and store log data
     const [surveyCompleted, setSurveyCompleted] = useState(false);
     const [calculatedResults, setCalculatedResults] = useState<CalculationResultsType | null>(null);
     const [isClient, setIsClient] = useState(false);
     const resultsRef = useRef<HTMLDivElement>(null);
+
+
+    const anrede = calculatedResults && calculatedResults.salutation === "Frau" ? "Sehr geehrte Frau" : "Sehr geehrter Herr";
 
     survey.onComplete.add((sender: { data: SurveyResult; }, options: any) => {
         const surveyData = sender.data as SurveyResult;
@@ -63,7 +67,8 @@ function Home() {
                                 },
                                 
                                 
-                                    "salutation": String(calculatedResults.salutation),
+                                    "Anrede": anrede,
+                                    "Salutation": String(calculatedResults.salutation),
                                     "Geschlecht": String(calculatedResults.field_23_geschlecht),
                                     "First_Name" : String(calculatedResults.vorname),
                                     "Last_Name" : String(calculatedResults.nachname),
@@ -109,8 +114,8 @@ function Home() {
                                     "Korrektur_Faktor_bei_schwerer_Demenz_Gehhf_higkeit": String(calculatedResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit),
                                     "Korrektur_Faktor_bei_schwerer_Demenz_Rumpf_Arme": String(calculatedResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme),
                                     "Ergebnis_Korrektur_Faktor_Demenz": String(calculatedResults.field_178_Ergebnis_KorrekturFaktor_Demenz),
-                                    "Brutto1": String(calculatedResults.field_81_Summe_Pflegeleistung_im_durchscnitt_brutto),
-                                    "Netto1": String(calculatedResults.field_217_Summe_Pflegeleistung_im_durchscnitt_netto),
+                                    "Brutto1": String(calculatedResults.field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz),
+                                    "Netto1": String(calculatedResults.field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen),
                                     "Summe_Durchschnittliche_Pflegeleistungen_in_Minute": String(calculatedResults.field_216_Summe_Korrekturzeiten),
                                     "Durchschnittliche_Pflegeleistungen_in_Minuten_pro": String(calculatedResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten),
                                     "Summe_Durchschnittliche_Pflegeleistungen_in_Stunde": String(calculatedResults.field_212_Summe_durchschnittliche_Pflegeleistungen_in_Stunden_pro_Tag),

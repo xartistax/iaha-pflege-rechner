@@ -49,13 +49,18 @@ export interface CalculationResultsType {
     field_207_pflegezeit_in_min_pro_tag_Rasieren: number;
     field_172_Kompressionsstrumpfe: string;
     field_208_pflegezeit_in_min_pro_tag_Kompressionsstrumpfe: number;
-    field_81_Summe_Pflegeleistung_im_durchscnitt_brutto: number;
+    field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz: number;
     field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen: number;
     field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen: number;
     field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen: number;
     field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe: number;
     field_216_Summe_Korrekturzeiten: number;
-    field_217_Summe_Pflegeleistung_im_durchscnitt_netto: number;
+
+	field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen : number;
+
+
+
+
     field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit: number;
     field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme: number;
     field_178_Ergebnis_KorrekturFaktor_Demenz: number;
@@ -383,6 +388,7 @@ export const surveyJson: SurveyJSONType = {
 			"type": "dropdown",
 			"name": "Kanton",
 			"visible": false,
+			"visibleIf": "{Inkontinenz} notempty",
 			"title": "In welchem Kanton lebt die pflegebedürftige Person?",
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -420,6 +426,7 @@ export const surveyJson: SurveyJSONType = {
 			"type": "dropdown",
 			"name": "Krankenkasse",
 			"visible": false,
+			"visibleIf": "{Kanton} notempty",
 			"title": "Bei welcher Krankenkasse ist die pflegebedürftige Person grundversichert?",
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -461,7 +468,7 @@ export const surveyJson: SurveyJSONType = {
 				}
 			  },
 			  {
-				"value": "Herr",
+				"value": "Herr.",
 				"text": {
 				  "de": "Herr"
 				}

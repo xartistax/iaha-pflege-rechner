@@ -78,11 +78,12 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
         {
             section: 'Summen',
             items: [
-                { label: 'durchschnittliche Pflegeleistungen in Minuten an 30 Tagen vor Abzug für Korrekturen & Demenzfaktor', value: results.field_81_Summe_Pflegeleistung_im_durchscnitt_brutto },
-                { label: 'durchschnittliche Pflegeleistungen in Minuten an 30 Tagen', value: results.field_217_Summe_Pflegeleistung_im_durchscnitt_netto },
+                { label: 'durchschnittliche Pflegeleistungen in Minuten an 30 Tagen vor Abzug für Korrekturen & Demenzfaktor', value: results.field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz },
+                { label: 'durchschnittliche Pflegeleistungen in Minuten an 30 Tagen', value: results.field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen  },
                 { label: 'durchschnittliche Pflegeleistungen in Minuten pro Tag vor "Cap" bei 220 Minuten', value: results.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten },
                 { label: 'durchschnittliche Pflegeleistungen in Minuten pro Tag', value: results.field_218_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag },
                 { label: ' durchschnittliche Pflegeleistungen in Stunden pro Tag', value: results.field_212_Summe_durchschnittliche_Pflegeleistungen_in_Stunden_pro_Tag },
+                { label: 'Korrekturzeiten', value: results.field_216_Summe_Korrekturzeiten },
                
 
             ]
@@ -90,9 +91,9 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
         {
             section: 'Korrekturen',
             items: [
-                { label: 'Toilettengang + Hilfe beim Gehen', value: results.field_81_Summe_Pflegeleistung_im_durchscnitt_brutto },
-                { label: 'Ganzwäsche + An- & Ausziehen', value: results.field_217_Summe_Pflegeleistung_im_durchscnitt_netto },
-                { label: 'Teilwäsche + An- & Ausziehen', value: results.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten },
+                { label: 'Toilettengang + Hilfe beim Gehen', value: results.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen },
+                { label: 'Ganzwäsche + An- & Ausziehen', value: results.field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen },
+                { label: 'Teilwäsche + An- & Ausziehen', value: results.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen },
                 { label: 'Ganzwäsche + Kompressionsstrümpfe', value: results.field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe },
                 { label: 'Ganzwäsche + An- & Ausziehen', value: results.field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen },
                 { label: 'Teilwäsche + An- & Ausziehen', value: results.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen },

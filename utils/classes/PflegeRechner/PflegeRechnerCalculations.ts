@@ -9,14 +9,14 @@ interface Lookup {
 export class PflegeRechnerCalculations {
 
 	static iahaCalculation (data: SurveyResult) {
-		const mobilitaet = data['Mobilität'] as string; 
-		const bewegungseinschraenkung = data['Bewegungseinschränkung'] as string; 
-		const kognitiveProbleme = data['KognitiveProbleme'] as string; 
-		const aufstehenHinlegen = data['AufstehenHinlegen'] as string; 
-		const lageAendern = data['LageÄndern'] as string; 
-		const inkontinenz = data['Inkontinenz'] as string; 
-		const geschlecht = data['Geschlecht'] as string; 
-		const kompressionsstrumpfe = data['Kompressionsstrümpfe'] as string; 
+		const mobilitaet = data['Mobilität'] as string;  // 24
+		const bewegungseinschraenkung = data['Bewegungseinschränkung'] as string; // 25
+		const kognitiveProbleme = data['KognitiveProbleme'] as string; // 83
+		const aufstehenHinlegen = data['AufstehenHinlegen'] as string; // 136
+		const lageAendern = data['LageÄndern'] as string; // 137
+		const inkontinenz = data['Inkontinenz'] as string; // 138
+		const geschlecht = data['Geschlecht'] as string; // 23
+		const kompressionsstrumpfe = data['Kompressionsstrümpfe'] as string;  // 139
 		const kanton = data['Kanton'] as string; 
 		const krankenkasse = data['Krankenkasse'] as string; 
 
@@ -172,10 +172,27 @@ export class PflegeRechnerCalculations {
 
 
 		/// Ganzwäsche im Bad
-		if (PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja') {
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja"
+		// if (PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja') {
+		// 	PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja"
+		// 	PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
+		//   } 
+
+
+		if (PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja') {
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Nein';
+		} else if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja') {
 			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
-		  } 
+		} else if (
+			mobilitaet === '1' || 
+			mobilitaet === '2' || 
+			bewegungseinschraenkung === '1' || 
+			bewegungseinschraenkung === '2' || 
+			kognitiveProbleme === '2'
+		) {
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Ja';
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
+		}
+		
 		
 
 	
@@ -266,7 +283,7 @@ export class PflegeRechnerCalculations {
 		/// Hilfe beim gehen und stehen
 		if ( mobilitaet === '1' && aufstehenHinlegen === '1' ) {
 
-			PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen = PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen = 'Ja';
+			PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen = 'Ja';
 
 			PflegeRechnerFields.fields.calculationResults.field_201_pflegezeit_in_min_pro_tag_HilfeBeimGehenUndStehen = 
 			PflegeRechnerFields.fields.calculationFields.field_191_default_HilfeBeimGehenUndStehen * 2;
@@ -292,7 +309,22 @@ export class PflegeRechnerCalculations {
 
 		
 		/// Hilfe beim an- und ausziehen
-		if ( mobilitaet === '2' && aufstehenHinlegen === '2' ||  mobilitaet === '3' ||  mobilitaet === '4' && lageAendern === '1' || bewegungseinschraenkung === '2' || bewegungseinschraenkung === '3') {
+
+		// IF(AND(fieldname24=='1',fieldname136=='1'),'Ja',
+		// IF(fieldname24=='2','Ja',
+		// IF(AND(fieldname24=='3',fieldname137=='0'),'Ja',
+		// IF(fieldname25=='1','Ja',
+		// IF(fieldname25=='2','Ja',
+		// 'Nein')))))
+
+		if (
+			mobilitaet === "1" && aufstehenHinlegen === "1" ||
+			mobilitaet === "2" ||
+			mobilitaet === "3" && lageAendern === "0" ||
+			bewegungseinschraenkung === "1" ||
+			bewegungseinschraenkung === "2"
+
+		) {
 			
 			PflegeRechnerFields.fields.calculationResults.field_175_Hilfe_beim_Hilfe_beim_An_und_Ausziehen = 'Ja';
 			PflegeRechnerFields.fields.calculationResults.field_204_pflegezeit_in_min_pro_tag_Hilfe_beim_Hilfe_beim_An_und_Ausziehen = 
@@ -332,9 +364,12 @@ export class PflegeRechnerCalculations {
 		}
 
 		/// SUMMER Leistungen im Schnitt Brutto
-		PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_im_durchscnitt_brutto =
+
+		// fieldname184+fieldname194+fieldname193+fieldname195+fieldname196+fieldname197+fieldname209+fieldname198+fieldname199+fieldname200+fieldname201+fieldname202+fieldname203+fieldname204+fieldname205+fieldname206+fieldname207+fieldname208
+		PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz  =
 			PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett +
 			PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett +
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad +
 			PflegeRechnerFields.fields.calculationResults.field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad +
 			PflegeRechnerFields.fields.calculationResults.field_196_pflegezeit_in_min_pro_tag_haare_waschen +
 			PflegeRechnerFields.fields.calculationResults.field_197_pflegezeit_in_min_pro_tag_zahnpflege +
@@ -356,8 +391,7 @@ export class PflegeRechnerCalculations {
 		//Korrekturen
 
 		if (PflegeRechnerFields.fields.calculationResults.field_165_Begleitung_Toilettengang === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_166_HilfeBeimGehenUndStehen === 'Ja') {
-			PflegeRechnerFields.fields.calculationResults.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen =
-				PflegeRechnerFields.fields.calculationResults.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen - PflegeRechnerFields.fields.calculationResults.field_201_pflegezeit_in_min_pro_tag_HilfeBeimGehenUndStehen;
+			PflegeRechnerFields.fields.calculationResults.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen = -PflegeRechnerFields.fields.calculationResults.field_201_pflegezeit_in_min_pro_tag_HilfeBeimGehenUndStehen;
 		}
 
 		if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_175_Hilfe_beim_Hilfe_beim_An_und_Ausziehen === 'Ja') {
@@ -372,13 +406,25 @@ export class PflegeRechnerCalculations {
 			PflegeRechnerFields.fields.calculationResults.field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe = (2 * 4.3333 * PflegeRechnerFields.fields.calculationFields.field_189_default_KompressionsstruempfeOderVerband) / 30;
 		}
 
+		/// SUMME Korrekturzeiten
 		PflegeRechnerFields.fields.calculationResults.field_216_Summe_Korrekturzeiten =
 			PflegeRechnerFields.fields.calculationResults.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen +
 			PflegeRechnerFields.fields.calculationResults.field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen +
 			PflegeRechnerFields.fields.calculationResults.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen +
 			PflegeRechnerFields.fields.calculationResults.field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe;
 
-		PflegeRechnerFields.fields.calculationResults.field_217_Summe_Pflegeleistung_im_durchscnitt_netto = PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_im_durchscnitt_brutto - PflegeRechnerFields.fields.calculationResults.field_216_Summe_Korrekturzeiten;
+		//PflegeRechnerFields.fields.calculationResults.field_217_Summe_Pflegeleistung_im_durchscnitt_netto = PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_im_durchscnitt_brutto - PflegeRechnerFields.fields.calculationResults.field_216_Summe_Korrekturzeiten;
+
+
+
+		/// field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tage
+
+		PflegeRechnerFields.fields.calculationResults.field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen =
+    parseFloat(
+        (PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz - 
+         PflegeRechnerFields.fields.calculationResults.field_216_Summe_Korrekturzeiten).toFixed(2) // Use toFixed after subtraction
+    );
+
 
 		if (kognitiveProbleme === '2' && mobilitaet === '0') {
 			PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit = 0.7;
@@ -400,24 +446,60 @@ export class PflegeRechnerCalculations {
 			PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme = 1.1;
 		}
 
-		if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 2) {
-			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1;
-		} else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 1.7) {
+
+
+
+		// if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 2) {
+		// 	PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1;
+		// } else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 1.7) {
+		// 	PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 0.7;
+		// } else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 1.4) {
+		// 	PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 0.7;
+		// } else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 1.8) {
+		// 	PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
+		// } else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 2.2) {
+		// 	PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
+		// } else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 2.1) {
+		// 	PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
+		// } else {
+		// 	PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1;
+		// }
+
+
+		if (kognitiveProbleme === '2' && 
+			mobilitaet === '0') {
 			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 0.7;
-		} else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 1.4) {
+		} else if (kognitiveProbleme === '2' && 
+				   mobilitaet === '2') {
+			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
+		} else if (kognitiveProbleme === '2' && 
+				   mobilitaet === '3') {
+			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
+		} else if (kognitiveProbleme === '2' && 
+				   mobilitaet === '1' && 
+				   aufstehenHinlegen === '0') {
 			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 0.7;
-		} else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 1.8) {
-			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
-		} else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 2.2) {
-			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
-		} else if (PflegeRechnerFields.fields.calculationResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit + PflegeRechnerFields.fields.calculationResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme == 2.1) {
+		} else if (PflegeRechnerFields.fields.calculationResults.field_83_kognitive_probleme === '2' && 
+				   mobilitaet === '1' && 
+				   aufstehenHinlegen=== '1') {
 			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1.1;
 		} else {
 			PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz = 1;
 		}
 
+
+
+
+
+
+
+
 		PflegeRechnerFields.fields.calculationResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten =
-			Math.round(PflegeRechnerFields.fields.calculationResults.field_217_Summe_Pflegeleistung_im_durchscnitt_netto * PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz * 10) / 10;
+    parseFloat(
+        (PflegeRechnerFields.fields.calculationResults.field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen * 
+        PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz).toFixed(1)
+    );
+
 
 		if (PflegeRechnerFields.fields.calculationResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten > 220) {
 			PflegeRechnerFields.fields.calculationResults.field_218_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag = 220;
