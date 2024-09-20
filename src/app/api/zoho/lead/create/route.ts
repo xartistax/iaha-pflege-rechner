@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
             throw new Error('Failed to fetch Zoho token');
         }
 
-        const tokenData = await tokenResponse.json();
+        const tokenData = await tokenResponse.json(); 
         const accessToken = tokenData.access_token;
 
         console.log("Access Token:", accessToken);
