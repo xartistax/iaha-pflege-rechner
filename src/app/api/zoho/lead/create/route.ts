@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        const tokenRefreshUrl = process.env.TOKEN_REFRESH_URL || 'https://iaha-pflege-rechner.vercel.app/api/zoho/token/refresh';
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ;
+        const tokenRefreshUrl = `${baseUrl}/api/zoho/token/refresh`;
 
         console.log('Fetching token from:', tokenRefreshUrl);
         

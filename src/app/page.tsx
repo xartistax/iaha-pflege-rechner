@@ -53,7 +53,9 @@ function Home() {
             console.log(calculatedResults)
           const sendResultsToApi = async () => {
             try {
-              const response = await fetch('https://iaha-pflege-rechner.vercel.app/api/zoho/lead/create', {
+            
+              const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ;
+              const response = await fetch(`${baseUrl}/api/zoho/lead/create`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
