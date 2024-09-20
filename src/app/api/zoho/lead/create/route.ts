@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
         });
 
         if (!response.ok) {
+          console.error('Error fetching Zoho token:', response.statusText);
           return NextResponse.json({ error: 'Failed to refresh Zoho token' }, { status: 500 });
         }
 
