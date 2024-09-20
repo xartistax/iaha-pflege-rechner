@@ -1,61 +1,49 @@
-// pages/api/zoho-token.js
-
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        // Make a request to your internal API route to refresh the Zoho token
-        const tokenResponse = await fetch('http://localhost:3001/api/zoho/token/refresh', {
+        const tokenRefreshUrl = process.env.TOKEN_REFRESH_URL || 'http://localhost:3001/api/zoho/token/refresh';
+
+        console.log('Fetching token from:', tokenRefreshUrl);
+        
+        const tokenResponse = await fetch(tokenRefreshUrl, {
             method: 'POST',
         });
 
         if (!tokenResponse.ok) {
+            console.error('Failed to fetch token. Status:', tokenResponse.status, 'StatusText:', tokenResponse.statusText);
             throw new Error('Failed to fetch Zoho token');
         }
 
         const tokenData = await tokenResponse.json();
-
-        // Extract the access token from the response
         const accessToken = tokenData.access_token;
 
-        // Log the access token (for debugging purposes)
         console.log("Access Token:", accessToken);
-
-
-        /// CREATE A NEW LEAD IN ZOHO
 
         const url = 'https://www.zohoapis.eu/crm/v2/Leads';
         const body = await req.json();
 
-
-        console.log(body)
-
+        console.log('Sending lead data to Zoho:', body);
 
         const response = await fetch(`${url}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization' : `Zoho-oauthtoken ${accessToken}`
-          },
-          body: JSON.stringify(body)
-          
-        
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Zoho-oauthtoken ${accessToken}`
+            },
+            body: JSON.stringify(body)
         });
 
         if (!response.ok) {
-          console.error('Error fetching Zoho token:', response.statusText);
-          return NextResponse.json({ error: 'Failed to refresh Zoho token' }, { status: 500 });
+            console.error('Error sending data to Zoho:', response.statusText);
+            return NextResponse.json({ error: 'Failed to create Zoho lead' }, { status: 500 });
         }
 
-
-        
-
-        // Return the access token in the response
-        return NextResponse.json({ response }, { status: 200 });
-
+        const responseData = await response.json();
+        return NextResponse.json({ response: responseData }, { status: 200 });
 
     } catch (error) {
-        console.error('Error fetching Zoho token:', error);
-        return NextResponse.json({ error: 'Failed to fetch Zoho token' }, { status: 500 });
+        console.error('Error:', error);
+        return NextResponse.json({ error: 'An error occurred' }, { status: 500 });
     }
 }
