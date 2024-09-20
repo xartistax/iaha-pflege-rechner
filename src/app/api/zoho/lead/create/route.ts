@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         // Make a request to your internal API route to refresh the Zoho token
-        const tokenRefreshUrl = process.env.TOKEN_REFRESH_URL || '/api/zoho/token/refresh';
+        const tokenRefreshUrl = process.env.TOKEN_REFRESH_URL || 'https://iaha-pflege-rechner.vercel.app/api/zoho/token/refresh';
 
         console.log('Fetching token from:', tokenRefreshUrl);
         
