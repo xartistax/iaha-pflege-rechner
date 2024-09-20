@@ -140,8 +140,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
                                 </TableCell>
                             </TableRow>
                             {/* Rows for each section */}
-                            {sectionData.items.map((row) => (
-                                <TableRow key={row.label}>
+                            {sectionData.items.map((row, i) => (
+                                <TableRow key={`${row.label}-${i}`}>
                                     <TableCell>{row.label}</TableCell>
                                     <TableCell align="right">{row.value}</TableCell>
                                 </TableRow>

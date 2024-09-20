@@ -202,7 +202,7 @@ function Home() {
                 {isClient && (
                     <>
                         <Typography variant="h2" gutterBottom>
-                            IAHA Pflegerechner
+                            IAHA Pflegerechner v3
                         </Typography>
                         <Survey model={survey} />
                     </>  

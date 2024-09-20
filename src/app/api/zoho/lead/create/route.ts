@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        const tokenRefreshUrl = process.env.TOKEN_REFRESH_URL || 'http://localhost:3001/api/zoho/token/refresh';
+        // Make a request to your internal API route to refresh the Zoho token
+        const tokenRefreshUrl = process.env.TOKEN_REFRESH_URL || '/api/zoho/token/refresh';
 
         console.log('Fetching token from:', tokenRefreshUrl);
         
-        const tokenResponse = await fetch(tokenRefreshUrl , {
+        const tokenResponse = await fetch(tokenRefreshUrl, {
             method: 'POST',
         });
 
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
             throw new Error('Failed to fetch Zoho token');
         }
 
-        const tokenData = await tokenResponse.json(); 
+        const tokenData = await tokenResponse.json();
         const accessToken = tokenData.access_token;
 
         console.log("Access Token:", accessToken);
@@ -23,7 +24,8 @@ export async function POST(req: NextRequest) {
         const url = 'https://www.zohoapis.eu/crm/v2/Leads';
         const body = await req.json();
 
-        console.log('Sending lead data to Zoho:', body);
+        // Log the body before making the fetch request!!!
+        console.log('Request body:', JSON.stringify(body, null, 2));
 
         const response = await fetch(`${url}`, {
             method: 'POST',
