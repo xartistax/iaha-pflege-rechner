@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        // Make a request to your internal API route to refresh the Zoho token
         const tokenRefreshUrl = process.env.TOKEN_REFRESH_URL || 'https://iaha-pflege-rechner.vercel.app/api/zoho/token/refresh';
 
         console.log('Fetching token from:', tokenRefreshUrl);
@@ -16,15 +15,20 @@ export async function POST(req: NextRequest) {
             throw new Error('Failed to fetch Zoho token');
         }
 
+        // Log the entire token response
         const tokenData = await tokenResponse.json();
-        const accessToken = tokenData.access_token;
+        console.log('Token response data:', JSON.stringify(tokenData, null, 2));
 
+        const accessToken = tokenData.access_token;
         console.log("Access Token:", accessToken);
+
+        if (!accessToken) {
+            throw new Error('Access token is undefined or invalid');
+        }
 
         const url = 'https://www.zohoapis.eu/crm/v2/Leads';
         const body = await req.json();
 
-        // Log the body before making the fetch request!!!
         console.log('Request body:', JSON.stringify(body, null, 2));
 
         const response = await fetch(`${url}`, {
