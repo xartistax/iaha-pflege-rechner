@@ -198,11 +198,11 @@ export class PflegeRechnerCalculations {
 	
 
 		if (
-			mobilitaet === '0' && aufstehenHinlegen === '0' ||
-			mobilitaet === '1' ||
-			bewegungseinschraenkung === '0' ||
+			mobilitaet === '1' && aufstehenHinlegen === '1' ||
+			mobilitaet === '2' ||
 			bewegungseinschraenkung === '1' ||
-			kognitiveProbleme === '0'
+			bewegungseinschraenkung === '2' ||
+			kognitiveProbleme === '2'
 
 		) {
 			PflegeRechnerFields.fields.calculationResults.field_152_teilwaesche_im_bad = 'Ja';
@@ -272,7 +272,16 @@ export class PflegeRechnerCalculations {
 		}
 
 		/// Intimpflege
-		if ( (inkontinenz === '01' && mobilitaet === '2') || (inkontinenz === '2' && mobilitaet === '2') || (inkontinenz === '3' && mobilitaet === '2') || (inkontinenz === '1' && bewegungseinschraenkung === '1') || (inkontinenz === '2' && bewegungseinschraenkung === '1') || (inkontinenz === '3' && bewegungseinschraenkung === '1') || (inkontinenz === '1' && bewegungseinschraenkung === '1') || (inkontinenz === '1' && bewegungseinschraenkung === '2') || (inkontinenz === '3' && bewegungseinschraenkung === '2')) {
+		if ( 
+			inkontinenz === '1' && mobilitaet === '2' || 
+			inkontinenz === '2' && mobilitaet === '2' || 
+			inkontinenz === '3' && mobilitaet === '2' || 
+			inkontinenz === '1' && bewegungseinschraenkung === '1' || 
+			inkontinenz === '2' && bewegungseinschraenkung === '1' || 
+			inkontinenz === '3' && bewegungseinschraenkung === '1' || 
+			inkontinenz === '1' && bewegungseinschraenkung === '2' || 
+			inkontinenz === '2' && bewegungseinschraenkung === '2' || 
+			inkontinenz === '3' && bewegungseinschraenkung === '2') {
 			PflegeRechnerFields.fields.calculationResults.field_173_Intimpflege = 'Ja';
 
 			PflegeRechnerFields.fields.calculationResults.field_200_pflegezeit_in_min_pro_tag_Intimpflege = 
@@ -367,6 +376,7 @@ export class PflegeRechnerCalculations {
 
 		// fieldname184+fieldname194+fieldname193+fieldname195+fieldname196+fieldname197+fieldname209+fieldname198+fieldname199+fieldname200+fieldname201+fieldname202+fieldname203+fieldname204+fieldname205+fieldname206+fieldname207+fieldname208
 		PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz  =
+
 			PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett +
 			PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett +
 			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad +
