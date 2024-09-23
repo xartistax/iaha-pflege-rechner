@@ -362,7 +362,8 @@ export class PflegeRechnerCalculations {
 		}
 
 		/// Rasieren
-		if ( (geschlecht === '0' && kognitiveProbleme === '2') || (geschlecht === '0' && bewegungseinschraenkung === '1') || (geschlecht === '0' && bewegungseinschraenkung === '2') ) {
+		if ( 
+			geschlecht === '0' && kognitiveProbleme === '2' || geschlecht === '0' && bewegungseinschraenkung === '1' ||  geschlecht === '0' && bewegungseinschraenkung === '2' ) {
 			PflegeRechnerFields.fields.calculationResults.field_171_Rasieren = 'Ja';
 			PflegeRechnerFields.fields.calculationResults.field_207_pflegezeit_in_min_pro_tag_Rasieren = 
 			(4 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_10_default_RasurInKombinationMitGanzOderTeilwaesche) / 30;
