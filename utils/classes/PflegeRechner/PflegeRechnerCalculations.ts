@@ -308,7 +308,10 @@ export class PflegeRechnerCalculations {
 		}
 
 		/// Hilfe beim aufstehen und hinlegen
-		if ( (mobilitaet === '1' && aufstehenHinlegen === '1') || (mobilitaet === '2' && lageAendern === '1') || (mobilitaet === '3' && lageAendern === '1') ) {
+		if ( 
+			mobilitaet === '1' && aufstehenHinlegen === '1' || 
+			mobilitaet === '2' && lageAendern === '1' || 
+			mobilitaet === '3' && lageAendern === '1')  {
 			PflegeRechnerFields.fields.calculationResults.field_168_Hilfe_beim_Aufstehen_und_Hinlegen = 'Ja';
 
 			PflegeRechnerFields.fields.calculationResults.field_203_pflegezeit_in_min_pro_tag_Hilfe_beim_Aufstehen_und_Hinlegen = 
@@ -342,7 +345,9 @@ export class PflegeRechnerCalculations {
 		}
 
 		/// Dekubitusprophylaxe
-		if ( (mobilitaet === '2' && lageAendern === '1') || (mobilitaet === '3' && lageAendern === '1') ) 
+		if ( 
+			mobilitaet === '2' && lageAendern === '1' || 
+			mobilitaet === '3' && lageAendern === '1' ) 
 		{
 			PflegeRechnerFields.fields.calculationResults.field_169_Dekubitusprophylaxe = 'Ja';
 			PflegeRechnerFields.fields.calculationResults.field_205_pflegezeit_in_min_pro_tag_Dekubitusprophylaxe = PflegeRechnerFields.fields.calculationFields.field_188_default_Dekubitusprophylaxe ;
