@@ -155,43 +155,64 @@ export class PflegeRechnerCalculations {
 		) {
 			PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett = 'Ja';
 
-			// Pflegezeit in Min pro Tag- Ganzwäsche im Bett
-			// PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett = PflegeRechnerFields.fields.calculationFields.field_2_default_GanzwaescheBettlaegerigeKlientIn ;
-			
-			// Pflegezeit in Min pro Tag - Teilwäsche im Bett
-			// PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett = PflegeRechnerFields.fields.calculationFields.field_4_TeilwaescheImBett
-
-			/// Ganzwäsche im Bad?
-			// PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Ja';
-
-			/// Pflegezeit in Min pro Tag - Ganzwäsche im Bad
-			// PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
 		}
 
 
 
 
-		/// Ganzwäsche im Bad
+		// IF(fieldname24=='1','Ja',
+		// 	IF(fieldname24=='2','Ja',
+		// 	IF(fieldname25=='1','Ja',
+		// 	IF(fieldname25=='2','Ja',
+		// 	IF(fieldname83=='2','Ja',
+		// 	'Nein')))))
+			
+		// 	IF(AND(fieldname153=='Ja',fieldname143=='Ja'),
+		// 	'Nein',
+		// 	IF(fieldname143=='Ja','Ja',
+		// 	'Nein'))
+
+
+		if (mobilitaet === '1' || 
+			mobilitaet === '2' || 
+			bewegungseinschraenkung === '1' || 
+			bewegungseinschraenkung === '2' || 
+			kognitiveProbleme === '2') {
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja";
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
+		} else {
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Nein";
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = 0
+		}
+		
+		if (
+			PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja' && 
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja'
+		) {
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Nein";
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = 0
+
+		} else if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja') {
+
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja";
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
+		} else {
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Nein";
+			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = 0
+		}
+		
+			
+
+
+
+		// Ganzwäsche im Bad
 		// if (PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja') {
 		// 	PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja"
 		// 	PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
 		//   } 
 
 
-		if (PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja' && PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja') {
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Nein';
-		} else if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja') {
-			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
-		} else if (
-			mobilitaet === '1' || 
-			mobilitaet === '2' || 
-			bewegungseinschraenkung === '1' || 
-			bewegungseinschraenkung === '2' || 
-			kognitiveProbleme === '2'
-		) {
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
-		}
+		
 		
 		
 
