@@ -173,32 +173,20 @@ export class PflegeRechnerCalculations {
 		// 	'Nein'))
 
 
+		// IF(fieldname144=='Ja',2*4.3333*fieldname1/30,0)
+
 		if (mobilitaet === '1' || 
 			mobilitaet === '2' || 
 			bewegungseinschraenkung === '1' || 
 			bewegungseinschraenkung === '2' || 
 			kognitiveProbleme === '2') {
 			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja";
-			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
-		} else {
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Nein";
-			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = 0
-		}
-		
-		if (
-			PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja' && 
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja'
-		) {
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Nein";
-			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = 0
+			// PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
+		} 
 
-		} else if (PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja') {
 
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Ja";
+		if ( PflegeRechnerFields.fields.calculationResults.field_144_Ganzwaesche_im_bad_2 === "Ja" ) {
 			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = (2 * 4.333 * PflegeRechnerFields.fields.calculationFields.field_1_default_GanzwaescheInBadDuscheOderAmLavabo) / 30;
-		} else {
-			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad = "Nein";
-			PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad = 0
 		}
 		
 			
@@ -217,28 +205,76 @@ export class PflegeRechnerCalculations {
 		
 
 	
+// 		IF(AND(fieldname24=='1',fieldname136=='1'),'Ja',
+// IF(fieldname24=='2','Ja',
+// IF(fieldname25=='1','Ja',
+// IF(fieldname25=='2','Ja',
+// IF(fieldname83=='2','Ja',
+// 'Nein')))))
+
+		
+
 
 		if (
-			mobilitaet === '1' && aufstehenHinlegen === '1' ||
+			(mobilitaet === '1' && aufstehenHinlegen === '1') ||
 			mobilitaet === '2' ||
 			bewegungseinschraenkung === '1' ||
 			bewegungseinschraenkung === '2' ||
 			kognitiveProbleme === '2'
-
 		) {
+			// Set the value for field_152_teilwaesche_im_bad
 			PflegeRechnerFields.fields.calculationResults.field_152_teilwaesche_im_bad = 'Ja';
-			PflegeRechnerFields.fields.calculationResults.field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad = (5 * 4.3333 * PflegeRechnerFields.fields.calculationFields.field_3_default_TeilwaescheAmLavabo) / 30;
+		
+			// Calculate and set the value for field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad
+			PflegeRechnerFields.fields.calculationResults.field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad = 
+				(5 * 4.3333 * PflegeRechnerFields.fields.calculationFields.field_3_default_TeilwaescheAmLavabo) / 30;
+		}
+		
 
+		
+		
+
+
+
+
+
+		/// field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett
+		/// IF(fieldname153=='Ja',fieldname2,0)
+
+		if ( PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja' ) {
+			PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett = PflegeRechnerFields.fields.calculationFields.field_2_default_GanzwaescheBettlaegerigeKlientIn
+			PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett = PflegeRechnerFields.fields.calculationFields.field_4_TeilwaescheImBett
 		}
 
+		
+
+
+
+		/// field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett
+		/// IF(fieldname153=='Ja',fieldname4,0)
+
+	
 
 
 
 
 
 
+		/// Ganzwäsche im Bad 2
+
+		// IF(AND(fieldname153=='Ja',fieldname143=='Ja'),
+		// 'Nein',
+		// IF(fieldname143=='Ja','Ja',
+		// 'Nein'))
 
 
+		if ( 
+			PflegeRechnerFields.fields.calculationResults.field_153_koerperpflege_im_bett === 'Ja' && 
+			PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja' ) {
+				PflegeRechnerFields.fields.calculationResults.field_144_Ganzwaesche_im_bad_2 = 'Nein'
+			} else if ( PflegeRechnerFields.fields.calculationResults.field_143_Ganzwaesche_im_bad === 'Ja' ) {
+				PflegeRechnerFields.fields.calculationResults.field_144_Ganzwaesche_im_bad_2 = 'Ja'
+			}
 
 
 
@@ -329,10 +365,22 @@ export class PflegeRechnerCalculations {
 		}
 
 		/// Hilfe beim aufstehen und hinlegen
+
+		// IF(AND(fieldname24=='1',fieldname136=='1'),'Ja',
+		// IF(AND(fieldname24=='2',fieldname137=='0'),'Ja',
+		// IF(AND(fieldname24=='3',fieldname137=='0'),'Ja','Nein')))
+
+		
+
 		if ( 
-			mobilitaet === '1' && aufstehenHinlegen === '1' || 
-			mobilitaet === '2' && lageAendern === '1' || 
-			mobilitaet === '3' && lageAendern === '1')  {
+
+
+			(mobilitaet === '1' && aufstehenHinlegen === '1') || 
+			(mobilitaet === '2' && lageAendern === '0') || 
+			(mobilitaet === '3' && lageAendern === '0')
+			    
+		
+		)  {
 			PflegeRechnerFields.fields.calculationResults.field_168_Hilfe_beim_Aufstehen_und_Hinlegen = 'Ja';
 
 			PflegeRechnerFields.fields.calculationResults.field_203_pflegezeit_in_min_pro_tag_Hilfe_beim_Aufstehen_und_Hinlegen = 

@@ -26,6 +26,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
             items: [
                 { label: 'Körperpflege im Bett', value: results.field_153_koerperpflege_im_bett },
                 { label: 'Ganzwäsche im Bad', value: results.field_143_Ganzwaesche_im_bad },
+                { label: 'Ganzwäsche im Bad (2nd)', value: results.field_144_Ganzwaesche_im_bad_2 },
                 { label: 'Teilwäsche im Bad', value: results.field_152_teilwaesche_im_bad},
                 { label: 'Pflegezeit in Min pro Tag- Ganzwäsche im Bett', value: results.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett },
                 { label: 'Pflegezeit in Min pro Tag - Teilwäsche im Bett', value: results.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett },

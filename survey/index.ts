@@ -18,6 +18,7 @@ export interface CalculationResultsType {
     field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett: number; 
     field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett: number;
     field_143_Ganzwaesche_im_bad: string;
+	field_144_Ganzwaesche_im_bad_2: string;
     field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad: number;
     field_152_teilwaesche_im_bad: string;
     field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad: number;
