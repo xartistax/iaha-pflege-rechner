@@ -1,0 +1,29 @@
+import { SurveyResult } from '../../../../survey';
+import { iahaCalculation } from '../PflegeRechnerCalculations';
+import { PflegeRechnerFields } from '../PflegeRechnerFields';
+
+// Assuming `data` is the input (SurveyResult)
+export function Calculation_Summen() {
+	/// SUMMER Leistungen im Schnitt Brutto
+
+	// fieldname184+fieldname194+fieldname193+fieldname195+fieldname196+fieldname197+fieldname209+fieldname198+fieldname199+fieldname200+fieldname201+fieldname202+fieldname203+fieldname204+fieldname205+fieldname206+fieldname207+fieldname208
+	PflegeRechnerFields.fields.calculationResults.field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz =
+		PflegeRechnerFields.fields.calculationResults.field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett +
+		PflegeRechnerFields.fields.calculationResults.field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett +
+		PflegeRechnerFields.fields.calculationResults.field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad +
+		PflegeRechnerFields.fields.calculationResults.field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad +
+		PflegeRechnerFields.fields.calculationResults.field_196_pflegezeit_in_min_pro_tag_haare_waschen +
+		PflegeRechnerFields.fields.calculationResults.field_197_pflegezeit_in_min_pro_tag_zahnpflege +
+		PflegeRechnerFields.fields.calculationResults.field_209_pflegezeit_in_min_pro_tag_Fingernaegel_schneiden +
+		PflegeRechnerFields.fields.calculationResults.field_198_pflegezeit_in_min_pro_tag_Zehnaegel_schneiden +
+		PflegeRechnerFields.fields.calculationResults.field_199_pflegezeit_in_min_pro_tag_Begleitung_Toilettengang +
+		PflegeRechnerFields.fields.calculationResults.field_200_pflegezeit_in_min_pro_tag_Intimpflege +
+		PflegeRechnerFields.fields.calculationResults.field_201_pflegezeit_in_min_pro_tag_HilfeBeimGehenUndStehen +
+		PflegeRechnerFields.fields.calculationResults.field_202_pflegezeit_in_min_pro_tag_LagerungImBett +
+		PflegeRechnerFields.fields.calculationResults.field_203_pflegezeit_in_min_pro_tag_Hilfe_beim_Aufstehen_und_Hinlegen +
+		PflegeRechnerFields.fields.calculationResults.field_204_pflegezeit_in_min_pro_tag_Hilfe_beim_Hilfe_beim_An_und_Ausziehen +
+		PflegeRechnerFields.fields.calculationResults.field_205_pflegezeit_in_min_pro_tag_Dekubitusprophylaxe +
+		PflegeRechnerFields.fields.calculationResults.field_206_pflegezeit_in_min_pro_tag_Unterstutzung_Essen_und_Trinken +
+		PflegeRechnerFields.fields.calculationResults.field_207_pflegezeit_in_min_pro_tag_Rasieren +
+		PflegeRechnerFields.fields.calculationResults.field_208_pflegezeit_in_min_pro_tag_Kompressionsstrumpfe;
+}

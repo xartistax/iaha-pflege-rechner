@@ -18,7 +18,6 @@ export interface CalculationResultsType {
     field_184_pflegezeit_in_min_pro_tag_Ganzwasche_im_Bett: number; 
     field_194_pflegezeit_in_min_pro_tag_Teilwasche_im_bett: number;
     field_143_Ganzwaesche_im_bad: string;
-	field_144_Ganzwaesche_im_bad_2: string;
     field_193_pflegezeit_in_min_pro_tag_Ganzwaesche_im_bad: number;
     field_152_teilwaesche_im_bad: string;
     field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad: number;
@@ -173,6 +172,358 @@ export interface ChoiceObjectAlt {
 	value: string;
 	text: LanguageText;
 }
+
+// export const surveyJson: SurveyJSONType = {
+// 	"locale": "de",
+// 	"logoPosition": "right",
+// 	"pages": [
+// 	  {
+// 		"name": "page1",
+// 		"elements": [
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "Geschlecht",
+// 			"title": {
+// 			  "default": "Bitte geben Sie das Geschlecht der pflegebedürftigen Person an",
+// 			  "de": "23_Bitte geben Sie das Geschlecht der pflegebedürftigen Person an"
+// 			},
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "Männlich"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "Weiblich"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "Mobilität",
+// 			"visibleIf": "{Geschlecht} notempty",
+// 			"title": {
+// 			  "default": "Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?",
+// 			  "de": "24_Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?"
+// 			},
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "keine Einschränkung der Gehfähigkeit"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "Gangunsicher oder benutzt Rollator"
+// 			  },
+// 			  {
+// 				"value": "2",
+// 				"text": "ist auf einen Rollstuhl angewiesen"
+// 			  },
+// 			  {
+// 				"value": "3",
+// 				"text": "ist bettlägerig"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "AufstehenHinlegen",
+// 			"visible": false,
+// 			"visibleIf": "{Mobilität} = 1",
+// 			"title": {
+// 			  "default": "Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?",
+// 			  "de": "136_Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?"
+// 			},
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "Aufstehen & Hinlegen ist selbständig möglich"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "ist auf Hilfe beim Aufstehen & Hinlegen angewiesen"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "LageÄndern",
+// 			"visible": false,
+// 			"visibleIf": "{Mobilität} = 2 or {Mobilität} = 3",
+// 			"title": {
+// 			  "default": "Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?",
+// 			  "de": "137_Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?"
+// 			},
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "Die Person kann ihre Lage und Position / Lage selbst verändern"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "Die Person ist für die Lageänderung auf Hilfe angewiesen"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "Kompressionsstrümpfe",
+// 			"visible": false,
+// 			"visibleIf": "{Mobilität} = 0 or {AufstehenHinlegen} notempty or {LageÄndern} notempty",
+// 			"title": {
+// 			  "default": "Benutzt die pflegebedürftige Person Kompressionsstrümpfe?",
+// 			  "de": "139_Benutzt die pflegebedürftige Person Kompressionsstrümpfe?"
+// 			},
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "Nein"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "Ja"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "Bewegungseinschränkung",
+// 			"visible": false,
+// 			"visibleIf": "{Kompressionsstrümpfe} notempty",
+// 			"title": {
+// 			  "default": "Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?",
+// 			  "de": "25_Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?"
+// 			},
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "keine Einschränkung der Bewegung des Oberkörpers und/oder der Arme/Hände"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "es bestehen Einschränkungen bei der Bewegung des Oberkörpers und/oder der Arme/Hände"
+// 			  },
+// 			  {
+// 				"value": "2",
+// 				"text": "schwerste Einschränkungen des Oberkörpers und/oder der Arme/Hände (z.B. Tetraplegiker)"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "KognitiveProbleme",
+// 			"visible": false,
+// 			"visibleIf": "{Bewegungseinschränkung} notempty",
+// 			"title": {
+// 			  "default": "Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?",
+// 			  "de": "83_Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?"
+// 			},
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "keine kognitiven Einschränkungen"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "leichte Form der Demenz"
+// 			  },
+// 			  {
+// 				"value": "2",
+// 				"text": "schwere Form der Demenz"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "Inkontinenz",
+// 			"visible": false,
+// 			"visibleIf": "{KognitiveProbleme} notempty",
+// 			"title": {
+// 			  "default": "Leidet die pflegebedürftige Person unter Inkontinenz?",
+// 			  "de": "138_Leidet die pflegebedürftige Person unter Inkontinenz?"
+// 			},
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "0",
+// 				"text": "keine Inkontinenz"
+// 			  },
+// 			  {
+// 				"value": "1",
+// 				"text": "Urin-Inkontinenz"
+// 			  },
+// 			  {
+// 				"value": "2",
+// 				"text": "Stuhl-Inkontinenz"
+// 			  },
+// 			  {
+// 				"value": "3",
+// 				"text": "beides"
+// 			  }
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "Kanton",
+// 			"visible": false,
+// 			"visibleIf": "{Inkontinenz} notempty",
+// 			"title": "In welchem Kanton lebt die pflegebedürftige Person?",
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  "Aargau",
+// 			  "Appenzell A.Rh.",
+// 			  "Appenzell I.Rh.",
+// 			  "Basel-Landschaft",
+// 			  "Basel-Stadt",
+// 			  "Bern",
+// 			  "Freiburg",
+// 			  "Genf",
+// 			  "Glarus",
+// 			  "Graubünden",
+// 			  "Jura",
+// 			  "Luzern",
+// 			  "Neuenburg",
+// 			  "Nidwalden",
+// 			  "Obwalden",
+// 			  "Sankt Gallen",
+// 			  "Schaffhausen",
+// 			  "Schwyz",
+// 			  "Solothurn",
+// 			  "Tessin",
+// 			  "Thurgau",
+// 			  "Uri",
+// 			  "Waadt",
+// 			  "Wallis",
+// 			  "Zug",
+// 			  "Zürich"
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  },
+// 		  {
+// 			"type": "dropdown",
+// 			"name": "Krankenkasse",
+// 			"visible": false,
+// 			"visibleIf": "{Kanton} notempty",
+// 			"title": "Bei welcher Krankenkasse ist die pflegebedürftige Person grundversichert?",
+// 			"clearIfInvisible": "onHidden",
+// 			"isRequired": true,
+// 			"choices": [
+// 			  "Assura",
+// 			  "Atupri",
+// 			  "Concordia",
+// 			  "CSS",
+// 			  "Groupe Mutuel",
+// 			  "Helsana",
+// 			  "KPT",
+// 			  "Sanitas",
+// 			  "Swica",
+// 			  "Visana",
+// 			  "SONSTIGE"
+// 			],
+// 			"placeholder": "bitte auswählen"
+// 		  }
+// 		]
+// 	  },
+// 	  {
+// 		"name": "page2",
+// 		"title": {
+// 		  "de": "Kontaktangaben"
+// 		},
+// 		"elements": [
+// 		  {
+// 			"type": "radiogroup",
+// 			"name": "anrede",
+// 			"title": {
+// 			  "de": "Anrede"
+// 			},
+// 			"isRequired": true,
+// 			"choices": [
+// 			  {
+// 				"value": "Frau",
+// 				"text": {
+// 				  "de": "Frau"
+// 				}
+// 			  },
+// 			  {
+// 				"value": "Herr.",
+// 				"text": {
+// 				  "de": "Herr"
+// 				}
+// 			  }
+// 			]
+// 		  },
+// 		  {
+// 			"type": "text",
+// 			"name": "vorname",
+// 			"title": {
+// 			  "de": "Vorname\n"
+// 			},
+// 			"isRequired": true
+// 		  },
+// 		  {
+// 			"type": "text",
+// 			"name": "nachname",
+// 			"title": {
+// 			  "de": "Nachname\n"
+// 			},
+// 			"isRequired": true
+// 		  },
+// 		  {
+// 			"type": "text",
+// 			"name": "phone",
+// 			"title": {
+// 			  "de": "Geben Sie hier bitte eine Rückrufnummer an.\n"
+// 			},
+// 			"isRequired": true,
+// 			"inputType": "tel"
+// 		  },
+// 		  {
+// 			"type": "text",
+// 			"name": "email",
+// 			"title": {
+// 			  "de": "Ihre Email-Adresse"
+// 			},
+// 			"isRequired": true,
+// 			"inputType": "email"
+// 		  }
+// 		]
+// 	  }
+// 	],
+// 	"showCompletedPage": false,
+// 	"showQuestionNumbers": "off",
+// 	"pageNextText": {
+// 	  "de": "Weiter "
+// 	},
+// 	"completeText": {
+// 	  "de": "Berechnen"
+// 	}
+//   }
+
+
+
 
 export const surveyJson: SurveyJSONType = {
 	"locale": "de",
@@ -445,70 +796,6 @@ export const surveyJson: SurveyJSONType = {
 			  "SONSTIGE"
 			],
 			"placeholder": "bitte auswählen"
-		  }
-		]
-	  },
-	  {
-		"name": "page2",
-		"title": {
-		  "de": "Kontaktangaben"
-		},
-		"elements": [
-		  {
-			"type": "radiogroup",
-			"name": "anrede",
-			"title": {
-			  "de": "Anrede"
-			},
-			"isRequired": true,
-			"choices": [
-			  {
-				"value": "Frau",
-				"text": {
-				  "de": "Frau"
-				}
-			  },
-			  {
-				"value": "Herr.",
-				"text": {
-				  "de": "Herr"
-				}
-			  }
-			]
-		  },
-		  {
-			"type": "text",
-			"name": "vorname",
-			"title": {
-			  "de": "Vorname\n"
-			},
-			"isRequired": true
-		  },
-		  {
-			"type": "text",
-			"name": "nachname",
-			"title": {
-			  "de": "Nachname\n"
-			},
-			"isRequired": true
-		  },
-		  {
-			"type": "text",
-			"name": "phone",
-			"title": {
-			  "de": "Geben Sie hier bitte eine Rückrufnummer an.\n"
-			},
-			"isRequired": true,
-			"inputType": "tel"
-		  },
-		  {
-			"type": "text",
-			"name": "email",
-			"title": {
-			  "de": "Ihre Email-Adresse"
-			},
-			"isRequired": true,
-			"inputType": "email"
 		  }
 		]
 	  }

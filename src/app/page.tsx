@@ -5,10 +5,11 @@ import { CalculationResultsType, surveyJson, SurveyResult } from "../../survey";
 import { PlainLightPanelless } from "survey-core/themes";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
-import { PflegeRechnerCalculations } from "../../utils/classes/PflegeRechner/PflegeRechnerCalculations";
+
 import { PflegeRechnerFields } from "../../utils/classes/PflegeRechner/PflegeRechnerFields";
 import ResultsTable from "../../survey/ResultsTable";
 import { Container, Box, Typography } from "@mui/material";
+import { iahaCalculation } from "../../utils/classes/PflegeRechner/PflegeRechnerCalculations";
 
 function Home() {
     const survey = new Model(surveyJson);
@@ -28,7 +29,7 @@ function Home() {
         const surveyData = sender.data as SurveyResult;
 
         // Perform calculations
-        PflegeRechnerCalculations.iahaCalculation(surveyData);
+        iahaCalculation(surveyData);
         
         // Update state with calculation results
         setCalculatedResults(PflegeRechnerFields.fields.calculationResults);
