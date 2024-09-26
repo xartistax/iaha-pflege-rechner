@@ -100,4 +100,5 @@ export function iahaCalculation(data: SurveyResult) {
     Calculation_DurchschnittlichePflegeleistungenInMinutenProTag220CAP()
     Calculation_DurchschnittlichePflegeleistungenInMinutenProTag()
     Calculation_BruttoLohn()
+    Calculation_Korekturen(data)
 }
