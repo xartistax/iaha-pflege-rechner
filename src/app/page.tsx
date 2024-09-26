@@ -5,11 +5,13 @@ import { CalculationResultsType, surveyJson, SurveyResult } from "../../survey";
 import { PlainLightPanelless } from "survey-core/themes";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
-
+import getConfig from 'next/config';
 import { PflegeRechnerFields } from "../../utils/classes/PflegeRechner/PflegeRechnerFields";
 import ResultsTable from "../../survey/ResultsTable";
 import { Container, Box, Typography } from "@mui/material";
 import { iahaCalculation } from "../../utils/classes/PflegeRechner/PflegeRechnerCalculations";
+
+
 
 function Home() {
     const survey = new Model(surveyJson);
@@ -20,7 +22,11 @@ function Home() {
     const [surveyCompleted, setSurveyCompleted] = useState(false);
     const [calculatedResults, setCalculatedResults] = useState<CalculationResultsType | null>(null);
     const [isClient, setIsClient] = useState(false);
+    const [buildHash, setBuildHash] = useState<string | null>(null); 
     const resultsRef = useRef<HTMLDivElement>(null);
+
+
+
 
 
     const anrede = calculatedResults && calculatedResults.salutation === "Frau" ? "Sehr geehrte Frau" : "Sehr geehrter Herr";
@@ -190,6 +196,8 @@ function Home() {
 
 
 
+    
+
 
 
 
@@ -206,8 +214,13 @@ function Home() {
                 {isClient && (
                     <>
                         <Typography variant="h2" gutterBottom>
-                            IAHA Pflegerechner v3
+                            IAHA Pflegerechner 
                         </Typography>
+
+                        <Typography>
+                        hash here
+                        </Typography>
+                       
                         <Survey model={survey} />
                     </>  
                 )}

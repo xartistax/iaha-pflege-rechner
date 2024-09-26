@@ -1,4 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+import buildId from "next-build-id";
 
-export default nextConfig;
+
+
+
+console.log("next-build-id", await buildId());
+
+

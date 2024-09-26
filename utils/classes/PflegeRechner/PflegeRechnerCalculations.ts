@@ -6,6 +6,8 @@ import { Calculation_AufstehenHinlegen } from './calculations/aufstehen_und_hinl
 import { Calculation_Toilettengang } from './calculations/begleitung_toilettengang';
 import { Calculation_Dekubitusprophylaxe } from './calculations/dekubitusprophylaxe';
 import { Calculation_DurchschnittlichePflegeleistungenInMinutenAn30Tage } from './calculations/durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tage';
+import { Calculation_DurchschnittlichePflegeleistungenInMinutenProTag } from './calculations/durchschnittliche_pflegeleistungen_in_minuten_pro_tag';
+import { Calculation_DurchschnittlichePflegeleistungenInMinutenProTag220CAP } from './calculations/durchschnittliche_pflegeleistungen_in_minuten_pro_tag_220_cap';
 import { Calculation_EssenTrinken } from './calculations/essen_und_trinken';
 import { Calculation_GanzwaescheImBad } from './calculations/ganzwaesche_Im_Bad';
 import { Calculation_GanzwaescheTeilwaescheImBett } from './calculations/ganzwaesche_teilwaesche_im_bett';
@@ -16,6 +18,7 @@ import { Calculation_KkUndKanton } from './calculations/kk_und_kanton';
 import { Calculation_KoerperpflegeImBett } from './calculations/koerperpflege_im_bett';
 import { Calculation_Korekturen } from './calculations/korrekturen';
 import { Calculation_LagerungImBett } from './calculations/lagerung_im_bett';
+import { Calculation_BruttoLohn } from './calculations/lohn';
 import { Calculation_Naegel } from './calculations/naegel';
 import { Calculation_Rasieren } from './calculations/rasieren';
 import { Calculation_KompressionsStruempfe } from './calculations/stuetzstruempfe';
@@ -42,14 +45,14 @@ export function iahaCalculation(data: SurveyResult) {
     const phone = data['phone'] as string;
     const email = data['email'] as string;
 
-    const mobilitaetText = mobilitaetLookup[mobilitaet] || 'Unbekannt';
-    const bewegungseinschraenkungText = bewegungseinschraenkungLookup[bewegungseinschraenkung] || 'Unbekannt';
-    const kognitiveProblemeText = kognitiveProblemeLookup[kognitiveProbleme] || 'Unbekannt';
-    const aufstehenHinlegenText = aufstehenHinlegenLookup[aufstehenHinlegen] || 'Unbekannt';
-    const lageAendernText = lageAendernLookup[lageAendern] || 'Unbekannt';
-    const inkontinenzText = inkontinenzLookup[inkontinenz] || 'Unbekannt';
-    const kompressionsText = kompressionsstrumpfeLookup[kompressionsstrumpfe] || 'Unbekannt';
-    const geschlechtText = geschlechtLookup[geschlecht] || 'Unbekannt';
+    const mobilitaetText = mobilitaetLookup[mobilitaet] || 'N/A';
+    const bewegungseinschraenkungText = bewegungseinschraenkungLookup[bewegungseinschraenkung] || 'N/A';
+    const kognitiveProblemeText = kognitiveProblemeLookup[kognitiveProbleme] || 'N/A';
+    const aufstehenHinlegenText = aufstehenHinlegenLookup[aufstehenHinlegen] || 'N/A';
+    const lageAendernText = lageAendernLookup[lageAendern] || 'N/A';
+    const inkontinenzText = inkontinenzLookup[inkontinenz] || 'N/A';
+    const kompressionsText = kompressionsstrumpfeLookup[kompressionsstrumpfe] || 'N/A';
+    const geschlechtText = geschlechtLookup[geschlecht] || 'N/A';
 
     /// Directly Map KK And Kanton
     PflegeRechnerFields.fields.calculationResults.field_76_kanton = kanton;
@@ -93,4 +96,8 @@ export function iahaCalculation(data: SurveyResult) {
     Calculation_Min220Cap(data);
     Calculation_DurchschnittlichePflegeleistungenInMinutenAn30Tage(data);
     Calculation_KkUndKanton(data);
+    
+    Calculation_DurchschnittlichePflegeleistungenInMinutenProTag220CAP()
+    Calculation_DurchschnittlichePflegeleistungenInMinutenProTag()
+    Calculation_BruttoLohn()
 }
