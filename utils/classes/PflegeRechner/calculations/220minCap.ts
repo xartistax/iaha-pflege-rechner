@@ -7,11 +7,9 @@ export function Calculation_Min220Cap(data: SurveyResult) {
 	// Call iahaCalculation to perform calculations
 	
 
-	PflegeRechnerFields.fields.calculationResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten =
-    parseFloat(
-        (PflegeRechnerFields.fields.calculationResults.field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen * 
-        PflegeRechnerFields.fields.calculationResults.field_178_Ergebnis_KorrekturFaktor_Demenz).toFixed(1)
-    );
+	// PflegeRechnerFields.fields.calculationResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten = 
+    // PflegeRechnerFields.fields.calculationResults.field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen * 3
+    
 
 
         if (PflegeRechnerFields.fields.calculationResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten > 220) {
@@ -39,6 +37,8 @@ export function Calculation_Min220Cap(data: SurveyResult) {
         } else if (PflegeRechnerFields.fields.calculationResults.field_218_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag > 180) {
             PflegeRechnerFields.fields.calculationResults.field_259_Definition_unterer_Bereich_Pflegezeiten = 180;
         }
+
+
 
         if (PflegeRechnerFields.fields.calculationResults.field_218_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag <= 30) {
             PflegeRechnerFields.fields.calculationResults.field_260_Definition_oberer_Bereich_Pflegezeiten = 30;
