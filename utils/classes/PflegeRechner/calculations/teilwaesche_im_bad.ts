@@ -9,7 +9,14 @@ export function Calculation_TeilwaescheImBad(data: SurveyResult) {
 
             const mobilitaet = data['Mobilität'] as string;
 
-            if ( mobilitaet !== '3' ) {
+
+            // mobilitaet === '1' && aufstehenHinlegen === '1') ||
+            //     mobilitaet === '2' ||
+            //     bewegungseinschraenkung === '1' ||
+            //     bewegungseinschraenkung === '2' ||
+            //     kognitiveProbleme === '2'
+
+            if ( mobilitaet === '1' || mobilitaet === '2' ) {
 
                 PflegeRechnerFields.fields.calculationResults.field_152_teilwaesche_im_bad = 'Ja';
                 PflegeRechnerFields.fields.calculationResults.field_195_pflegezeit_in_min_pro_tag_Teilwaesche_im_bad = 

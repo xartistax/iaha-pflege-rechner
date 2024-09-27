@@ -217,9 +217,7 @@ function Home() {
                             IAHA Pflegerechner 
                         </Typography>
 
-                        <Typography>
-                        hash here
-                        </Typography>
+                  
                        
                         <Survey model={survey} />
                     </>  

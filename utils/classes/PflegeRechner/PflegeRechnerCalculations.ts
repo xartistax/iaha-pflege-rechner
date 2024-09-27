@@ -17,6 +17,7 @@ import { Calculation_Intimpflege } from './calculations/intimpflege';
 import { Calculation_KkUndKanton } from './calculations/kk_und_kanton';
 import { Calculation_KoerperpflegeImBett } from './calculations/koerperpflege_im_bett';
 import { Calculation_Korekturen } from './calculations/korrekturen';
+import { Calculation_Korrekturfaktoren } from './calculations/korrekturfaktoren';
 import { Calculation_LagerungImBett } from './calculations/lagerung_im_bett';
 import { Calculation_BruttoLohn } from './calculations/lohn';
 import { Calculation_Naegel } from './calculations/naegel';
@@ -101,4 +102,5 @@ export function iahaCalculation(data: SurveyResult) {
     Calculation_DurchschnittlichePflegeleistungenInMinutenProTag()
     Calculation_BruttoLohn()
     Calculation_Korekturen(data)
+    Calculation_Korrekturfaktoren(data)
 }

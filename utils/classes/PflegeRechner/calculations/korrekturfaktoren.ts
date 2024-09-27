@@ -3,7 +3,7 @@ import { iahaCalculation } from "../PflegeRechnerCalculations";
 import { PflegeRechnerFields } from "../PflegeRechnerFields";
 
 // Assuming `data` is the input (SurveyResult)
-export function Calculation_DurchschnittlichePflegeleistungenInMinutenAn30Tage(data: SurveyResult) { 
+export function Calculation_Korrekturfaktoren(data: SurveyResult) { 
     // Call iahaCalculation to perform calculations
     
 

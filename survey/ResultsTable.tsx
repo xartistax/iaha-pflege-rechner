@@ -81,12 +81,12 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
         {
             section: 'Korrekturen',
             items: [
-                { label: 'Toilettengang + Hilfe beim Gehen', value: roundNumber(results.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen) },
-                { label: 'Ganzwäsche + An- & Ausziehen', value: roundNumber(results.field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen) },
-                { label: 'Teilwäsche + An- & Ausziehen', value: roundNumber(results.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen) },
-                { label: 'Ganzwäsche + Kompressionsstrümpfe', value: roundNumber(results.field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe) },
-                { label: 'Korrektur-Faktor bei schwerer Demenz - Gehfähigkeit', value: roundNumber(results.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit) },
-                { label: 'Korrektur-Faktor bei schwerer Demenz - Rumpf & Arme', value: roundNumber(results.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme) },
+                { label: 'Toilettengang + Hilfe beim Gehen', value: results.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen },
+                { label: 'Ganzwäsche + An- & Ausziehen', value: results.field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen },
+                { label: 'Teilwäsche + An- & Ausziehen', value: results.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen },
+                { label: 'Ganzwäsche + Kompressionsstrümpfe', value: results.field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe },
+                { label: 'Korrektur-Faktor bei schwerer Demenz - Gehfähigkeit', value: results.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit },
+                { label: 'Korrektur-Faktor bei schwerer Demenz - Rumpf & Arme', value: results.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme },
                 { label: 'Ergebnis: Demenz-Korrektur-Faktor (1.1 = Zeit-Zuschlag, 0.7 = Zeit-Abzug): 1', value: results.field_178_Ergebnis_KorrekturFaktor_Demenz }
             ]
         },
