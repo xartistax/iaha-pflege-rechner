@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import "survey-core/defaultV2.min.css";
-import { CalculationResultsType,  iahaThemeJson,  surveyJson, SurveyResult } from "../../survey";
+import { CalculationResultsType, iahaThemeJson, surveyJson, SurveyResult } from "../../survey";
 import { PlainLightPanelless } from "survey-core/themes";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
@@ -19,41 +19,29 @@ function Home() {
     const survey = new Model(surveyJson);
     survey.applyTheme(iahaThemeJson);
 
-    const router = useRouter();;
-
-
-    
+    const router = useRouter();
 
     // State to track survey completion and store log data
     const [surveyCompleted, setSurveyCompleted] = useState(false);
     const [calculatedResults, setCalculatedResults] = useState<CalculationResultsType | null>(null);
     const [isClient, setIsClient] = useState(false);
-    const [buildHash, setBuildHash] = useState<string | null>(null); 
+    const [buildHash, setBuildHash] = useState<string | null>(null);
     const resultsRef = useRef<HTMLDivElement>(null);
-
-
-
-
 
     const anrede = calculatedResults && calculatedResults.salutation === "Frau" ? "Sehr geehrte Frau" : "Sehr geehrter Herr";
 
     survey.locale = "de";
 
-    survey.onComplete.add((sender: { data: SurveyResult; }, options: any) => {
+    survey.onComplete.add((sender: { data: SurveyResult }, options: any) => {
         const surveyData = sender.data as SurveyResult;
 
         // Perform calculations
         iahaCalculation(surveyData);
-        
+
         // Update state with calculation results
         setCalculatedResults(PflegeRechnerFields.fields.calculationResults);
         setSurveyCompleted(true);
     });
-
-  
-
-
-
 
     useEffect(() => {
         setIsClient(true); // This triggers when the component mounts (on client-side)
@@ -65,37 +53,28 @@ function Home() {
         }
     }, [surveyCompleted]);
 
-
-
-
     useEffect(() => {
         if (calculatedResults) {
-            console.log(calculatedResults)
-          const sendResultsToApi = async () => {
-            try {
-            
-              const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ;
-              const response = await fetch(`${baseUrl}/api/zoho/lead/create`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(
-                    {
-                        "data": [
-                            {
-                                "Layout": {
-                                    "id": "655175000000032033"
-                                },
-                                
-                                
+            console.log(calculatedResults);
+            const sendResultsToApi = async () => {
+                try {
+                    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+                    const response = await fetch(`${baseUrl}/api/zoho/lead/create`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            "data": [
+                                {
+                                    "Layout": { "id": "655175000000032033" },
                                     "Anrede": anrede,
                                     "Salutation": String(calculatedResults.salutation),
                                     "Geschlecht": String(calculatedResults.field_23_geschlecht),
-                                    "First_Name" : String(calculatedResults.vorname),
-                                    "Last_Name" : String(calculatedResults.nachname),
-                                    "Phone" : String(calculatedResults.phone),
-                                    "Email" : String(calculatedResults.email),
+                                    "First_Name": String(calculatedResults.vorname),
+                                    "Last_Name": String(calculatedResults.nachname),
+                                    "Phone": String(calculatedResults.phone),
+                                    "Email": String(calculatedResults.email),
                                     "Mobilit_t": String(calculatedResults.field_24_mobilitaet),
                                     "Kompressionsstr_mpfe": String(calculatedResults.field_139_kompressionsstrumpfe),
                                     "Inkontinenz": String(calculatedResults.field_138_inkontinenz),
@@ -129,182 +108,67 @@ function Home() {
                                     "Rasieren": String(calculatedResults.field_171_Rasieren),
                                     "T_gliche_Pflegezeit_Kompressionsstr_mp": String(calculatedResults.field_208_pflegezeit_in_min_pro_tag_Kompressionsstrumpfe),
                                     "Toilettengang_und_Hilfe_beim_Gehen": String(calculatedResults.field_179_Korrektur_bei_Toilettengang_und_Hilfe_beim_Gehen),
-                                    "Korrektur_bei_Ganzw_sche_und_An_und_Ausziehen": String(calculatedResults.field_180_Korrektur_bei_Ganzwasche_und_An_Ausziehen),
-                                    "Korrektur_bei_Teilw_sche_und_An_und_Ausziehen": String(calculatedResults.field_182_Korrektur_bei_Teilwasche_und_An_Ausziehen),
-                                    "Korrektur_bei_Ganzw_sche_und_Kompressionsstr_mpfe": String(calculatedResults.field_181_Korrektur_bei_Ganzwasche_und_Kompressionsstrumpfe),
-                                    "Summe_Korrekturzeiten": String(calculatedResults.field_216_Summe_Korrekturzeiten),
-                                    "Korrektur_Faktor_bei_schwerer_Demenz_Gehhf_higkeit": String(calculatedResults.field_176_KorrekturFaktor_bei_schwerer_Demenz_Gehfahigkeit),
-                                    "Korrektur_Faktor_bei_schwerer_Demenz_Rumpf_Arme": String(calculatedResults.field_177_KorrekturFaktor_bei_schwerer_Demenz_Rumpf_Arme),
-                                    "Ergebnis_Korrektur_Faktor_Demenz": String(calculatedResults.field_178_Ergebnis_KorrekturFaktor_Demenz),
-                                    "Brutto1": String(calculatedResults.field_81_Summe_Pflegeleistung_in_Minuten_an_30_Tagen_vor_abzug_demenz),
-                                    "Netto1": String(calculatedResults.field_217_Summe_durchschnittliche_pflegeleistungen_in_Minuten_an_30_Tagen),
                                     "Summe_Durchschnittliche_Pflegeleistungen_in_Minute": String(calculatedResults.field_216_Summe_Korrekturzeiten),
-                                    "Durchschnittliche_Pflegeleistungen_in_Minuten_pro": String(calculatedResults.field_211_Summe_durchschnittliche_Pflegeleistungen_in_Minuten_pro_Tag_vor_CAP_bei_220_Minuten),
-                                    "Summe_Durchschnittliche_Pflegeleistungen_in_Stunde": String(calculatedResults.field_212_Summe_durchschnittliche_Pflegeleistungen_in_Stunden_pro_Tag),
-                                    "Definition_Unterer_Bereich_Pflegezeiten": String(calculatedResults.field_259_Definition_unterer_Bereich_Pflegezeiten),
-                                    "Definition_Oberer_Bereich_Pflegezeiten": String(calculatedResults.field_260_Definition_oberer_Bereich_Pflegezeiten),
-                                    "Bruttolohn" : String(calculatedResults.field_261_Bruttolohn),
+                                    "Bruttolohn": String(calculatedResults.field_261_Bruttolohn),
                                     "Kanton_abrechnung": String(calculatedResults.field_246_kanton_kann_abgerechnet_werden),
-                                    "Krankenkasse_abrechnung": String(calculatedResults.field_999_krankenkasse_kann_abgerechnet_werden),
-                                    "Kognitive_Probleme" : String(calculatedResults.field_83_kognitive_probleme)
-                            
-                                
-                    
-                                
-                    
-                    
-                    
-                            }
-                        ],
-                        "apply_feature_execution": [
-                            {
-                                "name": "layout_rules"
-                            }
-                        ],
-                        "trigger": [
-                            "approval",
-                            "workflow",
-                            "blueprint",
-                            "pathfinder",
-                            "orchestration"
-                        ]
+                                    "Kognitive_Probleme": String(calculatedResults.field_83_kognitive_probleme)
+                                }
+                            ]
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.text();
+                        console.error('Error sending results to API:', error);
+                    } else {
+                        const responseData = await response.json();
+                        console.log('API response:', responseData);
                     }
-                    
-                ),
-              });
-      
-              if (!response.ok) {
-                const error = await response.text();
-                console.error('Error sending results to API:', error);
-              } else {
-                const responseData = await response.json();
-                console.log('API response:', responseData);
-              }
-            } catch (error) {
-              console.error('Error making API request:', error);
-            }
-          };
-      
-          // Call the function to send the results to the API
-          sendResultsToApi();
+                } catch (error) {
+                    console.error('Error making API request:', error);
+                }
+            };
+
+            sendResultsToApi();
         }
-      }, [calculatedResults]);
+    }, [calculatedResults]);
 
-
-
-
-
-
-
-
-// Function to send the height of the content to the parent window
-const sendHeight = () => {
-    const height = document.documentElement.scrollHeight;
-    window.parent.postMessage({ height }, "*");
-  };
-
-  // Trigger height adjustment when the survey is rendered
-  survey.onAfterRenderSurvey.add(() => {
-    console.log("Survey rendered, sending initial height");
-    sendHeight(); // Send height after survey is fully rendered
-  });
-
-  // Handle changes to any question value
-  survey.onValueChanged.add((sender, options) => {
-    console.log("Value changed in question:", options.name);
-    console.log("New value:", options.value);
-    
-    // Trigger height adjustment on the first change
-    sendHeight();
-  });
-
-  survey.onCurrentPageChanged.add(() => {
-  console.log("Page changed");
-  sendHeight(); // Send height adjustment on page change
-});
-
-  // Initial setup to send height on component mount and resize
-  useEffect(() => {
-    sendHeight(); // Send initial height on mount
-
-    window.addEventListener("resize", sendHeight);
-
-    return () => {
-      window.removeEventListener("resize", sendHeight);
+    // Function to send the height of the content to the parent window
+    const sendHeight = () => {
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ height }, "*");
     };
-  }, []);
 
+    // Trigger height adjustment when the survey is rendered
+    survey.onAfterRenderSurvey.add(() => {
+        console.log("Survey rendered, sending initial height");
+        sendHeight();
+    });
 
-  
-  useEffect(() => {
-    // Send height when the route changes
-    sendHeight(); // Send initial height on mount
+    // Handle changes to any question value
+    survey.onValueChanged.add((sender, options) => {
+        console.log("Value changed in question:", options.name);
+        console.log("New value:", options.value);
 
-    window.addEventListener("resize", sendHeight);
-  }, [router]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
+        // Send height update when questions are answered or changed
+        sendHeight();
+    });
 
 
 
     return (
-        <Box id="SurveyMain" maxWidth="md" sx={{ mt: 3 }}>
-            <Box>
-                {/* Render Survey */}
-                {isClient && (
-                    <>
-                       
-                  
-                       {surveyCompleted && calculatedResults ? ( <ThankYouPage /> ) : ( 
-                        
-                        
-
-                        <>  
-                        
-                        <Survey model={survey} />  
-                        
-
-                        </>
-                        
-                        )}
-                        
-
-
-
-                    </>  
-                )}
-
-                {/* Conditionally render the results table only after the survey is completed */}
-                {/* {surveyCompleted && calculatedResults && (
-                    <Box mt={4} ref={resultsRef}>
-                       
-                        <ResultsTable results={calculatedResults} />
-                    </Box>
-                )} */}
-
-
+        <>
+            <Box maxWidth="md" sx={{ pt: 0, pb: 0 }}>
                 
-            </Box>
-        </Box>
+                {isClient && !surveyCompleted && <Survey model={survey} />}
+            </Box> 
+            {surveyCompleted && calculatedResults && (
+                <Box ref={resultsRef}>
+                    <ResultsTable results={calculatedResults} />
+                    <ThankYouPage />
+                </Box>
+            )}
+        </>
     );
 }
 
