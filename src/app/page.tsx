@@ -246,7 +246,7 @@ const sendHeight = () => {
 
 
     return (
-        <Container id="SurveyMain" maxWidth="md" sx={{ mt: 3 }}>
+        <Box id="SurveyMain" maxWidth="md" sx={{ mt: 3 }}>
             <Box>
                 {/* Render Survey */}
                 {isClient && (
@@ -267,7 +267,7 @@ const sendHeight = () => {
                     </Box>
                 )}
             </Box>
-        </Container>
+        </Box>
     );
 }
 
