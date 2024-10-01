@@ -10,6 +10,7 @@ import { PflegeRechnerFields } from "../../utils/classes/PflegeRechner/PflegeRec
 import ResultsTable from "../../survey/ResultsTable";
 import { Container, Box, Typography } from "@mui/material";
 import { iahaCalculation } from "../../utils/classes/PflegeRechner/PflegeRechnerCalculations";
+import ThankYouPage from "../../survey/ThankYouPage";
 
 
 
@@ -253,19 +254,24 @@ const sendHeight = () => {
                     <>
                        
                   
-                       
-                        <Survey model={survey} />
+                       {surveyCompleted && calculatedResults ? ( <ThankYouPage /> ) : ( <Survey model={survey} /> )}
+                        
+
+
+
                     </>  
                 )}
 
                 {/* Conditionally render the results table only after the survey is completed */}
-                {surveyCompleted && calculatedResults && (
+                {/* {surveyCompleted && calculatedResults && (
                     <Box mt={4} ref={resultsRef}>
                        
                         <ResultsTable results={calculatedResults} />
-
                     </Box>
-                )}
+                )} */}
+
+
+                
             </Box>
         </Box>
     );

@@ -10,9 +10,10 @@ export function Calculation_KkUndKanton(data: SurveyResult) {
 
     // Access `kanton` directly from `data`
     const kanton = data['Kanton'];
+    const kk = data['Krankenkasse'];
 
     // Now you can check if the kanton is in the array
-    if (krankenkassenAbgerechnetJa.includes(kanton)) {
+    if (krankenkassenAbgerechnetJa.includes(kk)) {
         PflegeRechnerFields.fields.calculationResults.field_999_krankenkasse_kann_abgerechnet_werden = 'Ja';
     }
     if (kantonAbgerechnetJa.includes(kanton)) {
