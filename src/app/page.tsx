@@ -189,30 +189,38 @@ function Home() {
 
 
 
-      survey.onValueChanged.add((sender, options) => {
-        console.log("Value changed in question:", options.name);
-        console.log("New value:", options.value);
+// Function to send the height of the content to the parent window
+const sendHeight = () => {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ height }, "*");
+  };
+
+  // Trigger height adjustment when the survey is rendered
+  survey.onAfterRenderSurvey.add(() => {
+    console.log("Survey rendered, sending initial height");
+    sendHeight(); // Send height after survey is fully rendered
+  });
+
+  // Handle changes to any question value
+  survey.onValueChanged.add((sender, options) => {
+    console.log("Value changed in question:", options.name);
+    console.log("New value:", options.value);
     
-        // Call a function to send the height of the content to the parent window
-        sendHeight();
-      });
-    
-      // Function to send the height of the content to the parent window
-      const sendHeight = () => {
-        const height = document.documentElement.scrollHeight;
-        window.parent.postMessage({ height }, "*");
-      };
-    
-      // Initial setup to send height on component mount and resize
-      useEffect(() => {
-        sendHeight(); // Send initial height
-    
-        window.addEventListener("resize", sendHeight);
-    
-        return () => {
-          window.removeEventListener("resize", sendHeight);
-        };
-      }, []);
+    // Trigger height adjustment on the first change
+    sendHeight();
+  });
+
+  // Initial setup to send height on component mount and resize
+  useEffect(() => {
+    sendHeight(); // Send initial height on mount
+
+    window.addEventListener("resize", sendHeight);
+
+    return () => {
+      window.removeEventListener("resize", sendHeight);
+    };
+  }, []);
+
 
 
 
