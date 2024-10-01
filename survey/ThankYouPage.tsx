@@ -52,7 +52,7 @@ export default function ThankYouPage() {
           </Typography>
           <Typography variant="body1" mt={2}>
             Ihre Antworten wurden erfasst.<br />
-            Wir verarbeiten nun die Daten und melden uns in den nächsten Minuten per E-Mail
+            Wir verarbeiten nun die Daten und melden uns in den nächsten Minuten per E-Mail bei Ihnen
           </Typography>
 
           {/* Optional CTA Button */}
