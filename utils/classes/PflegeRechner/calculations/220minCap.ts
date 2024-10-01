@@ -56,6 +56,6 @@ export function Calculation_Min220Cap(data: SurveyResult) {
             PflegeRechnerFields.fields.calculationResults.field_260_Definition_oberer_Bereich_Pflegezeiten = 220;
         }
 
-        PflegeRechnerFields.fields.calculationResults.field_261_Bruttolohn = Math.round((PflegeRechnerFields.fields.calculationResults.field_212_Summe_durchschnittliche_Pflegeleistungen_in_Stunden_pro_Tag * 35) * 26);
+        /// PflegeRechnerFields.fields.calculationResults.field_261_Bruttolohn = Math.round((PflegeRechnerFields.fields.calculationResults.field_212_Summe_durchschnittliche_Pflegeleistungen_in_Stunden_pro_Tag * 35) * 26);
 
 }
