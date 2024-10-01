@@ -138,6 +138,7 @@ export interface SurveyJSONType {
 	pages: Page[];
 	showQuestionNumbers: string
 	pageNextText : LanguageText,
+	pagePrevText: LanguageText,
 	completeText : LanguageText,
 	widthMode: string
 }
@@ -176,7 +177,7 @@ export interface ChoiceObjectAlt {
 	text: LanguageText;
 }
 
-export const surveyJson: SurveyJSONType = {
+export const surveyJson: SurveyJSONType =  {
 	"locale": "de",
 	"logoPosition": "right",
 	"loadingHtml": {
@@ -185,6 +186,9 @@ export const surveyJson: SurveyJSONType = {
 	"pages": [
 	  {
 		"name": "page1",
+		"title": {
+		  "de": "Mit nur 9 Fragen Pflegezeiten und Lohn berechnen!"
+		},
 		"elements": [
 		  {
 			"type": "dropdown",
@@ -431,9 +435,6 @@ export const surveyJson: SurveyJSONType = {
 	  },
 	  {
 		"name": "page2",
-		"title": {
-		  "de": "Kontaktangaben"
-		},
 		"elements": [
 		  {
 			"type": "radiogroup",
@@ -496,15 +497,16 @@ export const surveyJson: SurveyJSONType = {
 	],
 	"showQuestionNumbers": "off",
 	"pageNextText": {
-	  "de": "Weiter "
+	  "de": "Weiter"
+	},
+	"pagePrevText": {
+	  "de": "Zurück"
 	},
 	"completeText": {
 	  "de": "Berechnen"
 	},
 	"widthMode": "responsive"
   }
-
-
 
 
 

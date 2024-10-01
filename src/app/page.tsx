@@ -12,7 +12,7 @@ import { Container, Box, Typography } from "@mui/material";
 import { iahaCalculation } from "../../utils/classes/PflegeRechner/PflegeRechnerCalculations";
 import ThankYouPage from "../../survey/ThankYouPage";
 
-
+import "survey-core/i18n/german";
 
 function Home() {
     const survey = new Model(surveyJson);
@@ -33,6 +33,8 @@ function Home() {
 
 
     const anrede = calculatedResults && calculatedResults.salutation === "Frau" ? "Sehr geehrte Frau" : "Sehr geehrter Herr";
+
+    survey.locale = "de";
 
     survey.onComplete.add((sender: { data: SurveyResult; }, options: any) => {
         const surveyData = sender.data as SurveyResult;
@@ -254,7 +256,18 @@ const sendHeight = () => {
                     <>
                        
                   
-                       {surveyCompleted && calculatedResults ? ( <ThankYouPage /> ) : ( <Survey model={survey} /> )}
+                       {surveyCompleted && calculatedResults ? ( <ThankYouPage /> ) : ( 
+                        
+                        
+
+                        <>  
+                        
+                        <Survey model={survey} />  
+                        
+
+                        </>
+                        
+                        )}
                         
 
 
