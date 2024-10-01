@@ -42,26 +42,10 @@ function Home() {
         setSurveyCompleted(true);
     });
 
+  
 
-    useEffect(() => {
-        // Function to send the height of the content to the parent window
-        const sendHeight = () => {
-            const height = document.documentElement.scrollHeight;
-            window.parent.postMessage({ height }, '*');
-        };
-    
-        // Send height on component mount
-        sendHeight();
-    
-        // Optionally, listen for resize events to update the height dynamically
-        window.addEventListener('resize', sendHeight);
-    
-        // Cleanup the event listener on component unmount
-        return () => {
-            window.removeEventListener('resize', sendHeight);
-        };
-    }, []);
-    
+
+
 
     useEffect(() => {
         setIsClient(true); // This triggers when the component mounts (on client-side)
@@ -205,7 +189,30 @@ function Home() {
 
 
 
-
+      survey.onValueChanged.add((sender, options) => {
+        console.log("Value changed in question:", options.name);
+        console.log("New value:", options.value);
+    
+        // Call a function to send the height of the content to the parent window
+        sendHeight();
+      });
+    
+      // Function to send the height of the content to the parent window
+      const sendHeight = () => {
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ height }, "*");
+      };
+    
+      // Initial setup to send height on component mount and resize
+      useEffect(() => {
+        sendHeight(); // Send initial height
+    
+        window.addEventListener("resize", sendHeight);
+    
+        return () => {
+          window.removeEventListener("resize", sendHeight);
+        };
+      }, []);
 
 
 
