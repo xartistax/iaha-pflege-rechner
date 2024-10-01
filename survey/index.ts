@@ -185,7 +185,7 @@ export interface ChoiceObjectAlt {
 // 			"name": "Geschlecht",
 // 			"title": {
 // 			  "default": "Bitte geben Sie das Geschlecht der pflegebedürftigen Person an",
-// 			  "de": "23_Bitte geben Sie das Geschlecht der pflegebedürftigen Person an"
+// 			  "de": "Bitte geben Sie das Geschlecht der pflegebedürftigen Person an"
 // 			},
 // 			"isRequired": true,
 // 			"choices": [
@@ -206,7 +206,7 @@ export interface ChoiceObjectAlt {
 // 			"visibleIf": "{Geschlecht} notempty",
 // 			"title": {
 // 			  "default": "Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?",
-// 			  "de": "24_Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?"
+// 			  "de": "Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?"
 // 			},
 // 			"clearIfInvisible": "onHidden",
 // 			"isRequired": true,
@@ -237,7 +237,7 @@ export interface ChoiceObjectAlt {
 // 			"visibleIf": "{Mobilität} = 1",
 // 			"title": {
 // 			  "default": "Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?",
-// 			  "de": "136_Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?"
+// 			  "de": "Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?"
 // 			},
 // 			"clearIfInvisible": "onHidden",
 // 			"isRequired": true,
@@ -260,7 +260,7 @@ export interface ChoiceObjectAlt {
 // 			"visibleIf": "{Mobilität} = 2 or {Mobilität} = 3",
 // 			"title": {
 // 			  "default": "Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?",
-// 			  "de": "137_Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?"
+// 			  "de": "Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?"
 // 			},
 // 			"clearIfInvisible": "onHidden",
 // 			"isRequired": true,
@@ -283,7 +283,7 @@ export interface ChoiceObjectAlt {
 // 			"visibleIf": "{Mobilität} = 0 or {AufstehenHinlegen} notempty or {LageÄndern} notempty",
 // 			"title": {
 // 			  "default": "Benutzt die pflegebedürftige Person Kompressionsstrümpfe?",
-// 			  "de": "139_Benutzt die pflegebedürftige Person Kompressionsstrümpfe?"
+// 			  "de": "Benutzt die pflegebedürftige Person Kompressionsstrümpfe?"
 // 			},
 // 			"clearIfInvisible": "onHidden",
 // 			"isRequired": true,
@@ -306,7 +306,7 @@ export interface ChoiceObjectAlt {
 // 			"visibleIf": "{Kompressionsstrümpfe} notempty",
 // 			"title": {
 // 			  "default": "Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?",
-// 			  "de": "25_Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?"
+// 			  "de": "Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?"
 // 			},
 // 			"clearIfInvisible": "onHidden",
 // 			"isRequired": true,
@@ -333,7 +333,7 @@ export interface ChoiceObjectAlt {
 // 			"visibleIf": "{Bewegungseinschränkung} notempty",
 // 			"title": {
 // 			  "default": "Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?",
-// 			  "de": "83_Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?"
+// 			  "de": "Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?"
 // 			},
 // 			"clearIfInvisible": "onHidden",
 // 			"isRequired": true,
@@ -360,7 +360,7 @@ export interface ChoiceObjectAlt {
 // 			"visibleIf": "{KognitiveProbleme} notempty",
 // 			"title": {
 // 			  "default": "Leidet die pflegebedürftige Person unter Inkontinenz?",
-// 			  "de": "138_Leidet die pflegebedürftige Person unter Inkontinenz?"
+// 			  "de": "Leidet die pflegebedürftige Person unter Inkontinenz?"
 // 			},
 // 			"clearIfInvisible": "onHidden",
 // 			"isRequired": true,
@@ -537,7 +537,7 @@ export const surveyJson: SurveyJSONType = {
 			"name": "Geschlecht",
 			"title": {
 			  "default": "Bitte geben Sie das Geschlecht der pflegebedürftigen Person an",
-			  "de": "23_Bitte geben Sie das Geschlecht der pflegebedürftigen Person an"
+			  "de": "Bitte geben Sie das Geschlecht der pflegebedürftigen Person an"
 			},
 			"isRequired": true,
 			"choices": [
@@ -558,7 +558,7 @@ export const surveyJson: SurveyJSONType = {
 			"visibleIf": "{Geschlecht} notempty",
 			"title": {
 			  "default": "Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?",
-			  "de": "24_Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?"
+			  "de": "Wie mobil ist die pflegebedürftige Person in Ihrem Zuhause?"
 			},
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -589,7 +589,7 @@ export const surveyJson: SurveyJSONType = {
 			"visibleIf": "{Mobilität} = 1",
 			"title": {
 			  "default": "Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?",
-			  "de": "136_Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?"
+			  "de": "Kann die pflegebedürftige Person selbständig vom Bett aufstehen oder sich hinlegen?"
 			},
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -612,7 +612,7 @@ export const surveyJson: SurveyJSONType = {
 			"visibleIf": "{Mobilität} = 2 or {Mobilität} = 3",
 			"title": {
 			  "default": "Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?",
-			  "de": "137_Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?"
+			  "de": "Kann die pflegebedürftige Person ihre Lage (im Bett oder im Rollstuhl) selbst ändern?"
 			},
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -635,7 +635,7 @@ export const surveyJson: SurveyJSONType = {
 			"visibleIf": "{Mobilität} = 0 or {AufstehenHinlegen} notempty or {LageÄndern} notempty",
 			"title": {
 			  "default": "Benutzt die pflegebedürftige Person Kompressionsstrümpfe?",
-			  "de": "139_Benutzt die pflegebedürftige Person Kompressionsstrümpfe?"
+			  "de": "Benutzt die pflegebedürftige Person Kompressionsstrümpfe?"
 			},
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -658,7 +658,7 @@ export const surveyJson: SurveyJSONType = {
 			"visibleIf": "{Kompressionsstrümpfe} notempty",
 			"title": {
 			  "default": "Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?",
-			  "de": "25_Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?"
+			  "de": "Gibt es Einschränkungen der Bewegungsfähigkeit des Oberkörpers und/oder der Arme/Hände?"
 			},
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -685,7 +685,7 @@ export const surveyJson: SurveyJSONType = {
 			"visibleIf": "{Bewegungseinschränkung} notempty",
 			"title": {
 			  "default": "Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?",
-			  "de": "83_Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?"
+			  "de": "Leidet die pflegebedürftige Person unter kognitiven Problemen (Gedächtnisproblemen)?"
 			},
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
@@ -712,7 +712,7 @@ export const surveyJson: SurveyJSONType = {
 			"visibleIf": "{KognitiveProbleme} notempty",
 			"title": {
 			  "default": "Leidet die pflegebedürftige Person unter Inkontinenz?",
-			  "de": "138_Leidet die pflegebedürftige Person unter Inkontinenz?"
+			  "de": "Leidet die pflegebedürftige Person unter Inkontinenz?"
 			},
 			"clearIfInvisible": "onHidden",
 			"isRequired": true,
