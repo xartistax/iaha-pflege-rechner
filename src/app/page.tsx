@@ -213,10 +213,7 @@ function Home() {
                 {/* Render Survey */}
                 {isClient && (
                     <>
-                        <Typography variant="h2" gutterBottom>
-                            IAHA Pflegerechner 
-                        </Typography>
-
+                       
                   
                        
                         <Survey model={survey} />
