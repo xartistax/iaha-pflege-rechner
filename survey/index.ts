@@ -1,3 +1,5 @@
+import { ImageFit, ImageAttachment } from "survey-core";
+
 export interface CalculationResultsType {
 
 	field_138_inkontinenz : string,
@@ -528,14 +530,24 @@ export interface ChoiceObjectAlt {
 
 /// Survey style
 
-export const iahaThemeJson = {
+export const iahaThemeJson: {
+    themeName: string;
+    colorPalette: string;
+    isPanelless: boolean;
+    backgroundImage: string;
+    backgroundOpacity: number;
+    backgroundImageAttachment: ImageAttachment;
+    backgroundImageFit: ImageFit;
+    cssVariables: Record<string, string>;
+    headerView: "basic" | "advanced"; // Explicitly defining the type
+} = {
     "themeName": "borderless",
     "colorPalette": "light",
     "isPanelless": true,
     "backgroundImage": "",
     "backgroundOpacity": 1,
-    "backgroundImageAttachment": "scroll",
-    "backgroundImageFit": "cover",
+    "backgroundImageAttachment": "scroll" as ImageAttachment,
+    "backgroundImageFit": "cover" as ImageFit,
     "cssVariables": {
         "--sjs-font-family": "Arial, sans-serif",
         "--sjs-corner-radius": "4px",
