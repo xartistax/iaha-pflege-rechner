@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import "survey-core/defaultV2.min.css";
-import { CalculationResultsType, surveyJson, SurveyResult } from "../../survey";
+import { CalculationResultsType,  iahaThemeJson,  surveyJson, SurveyResult } from "../../survey";
 import { PlainLightPanelless } from "survey-core/themes";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
@@ -15,7 +15,9 @@ import { iahaCalculation } from "../../utils/classes/PflegeRechner/PflegeRechner
 
 function Home() {
     const survey = new Model(surveyJson);
-    survey.applyTheme(PlainLightPanelless);
+    survey.applyTheme(iahaThemeJson);
+
+
     
 
     // State to track survey completion and store log data
