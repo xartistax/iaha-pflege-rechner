@@ -11,7 +11,24 @@ import ResultsTable from "../../survey/ResultsTable";
 import { Container, Box, Typography } from "@mui/material";
 import { iahaCalculation } from "../../utils/classes/PflegeRechner/PflegeRechnerCalculations";
 
+useEffect(() => {
+    // Function to send the height of the content to the parent window
+    const sendHeight = () => {
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ height }, '*');
+    };
 
+    // Send height on component mount
+    sendHeight();
+
+    // Optionally, listen for resize events to update the height dynamically
+    window.addEventListener('resize', sendHeight);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+        window.removeEventListener('resize', sendHeight);
+    };
+}, []);
 
 function Home() {
     const survey = new Model(surveyJson);
