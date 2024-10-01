@@ -61,7 +61,7 @@ export default function ThankYouPage() {
             color="primary"
             sx={{ mt: 4, px: 4, py: 1.5, backgroundColor:"#01438F" }}
             onClick={() => {
-              window.location.href = '/'; // Redirect to home or any other page
+              window.location.href = 'https://www.iaha.ch'; // Redirect to home or any other page
             }}
           >
             Zur Startseite

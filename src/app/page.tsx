@@ -11,12 +11,15 @@ import ResultsTable from "../../survey/ResultsTable";
 import { Container, Box, Typography } from "@mui/material";
 import { iahaCalculation } from "../../utils/classes/PflegeRechner/PflegeRechnerCalculations";
 import ThankYouPage from "../../survey/ThankYouPage";
+import { useRouter } from 'next/navigation';
 
 import "survey-core/i18n/german";
 
 function Home() {
     const survey = new Model(surveyJson);
     survey.applyTheme(iahaThemeJson);
+
+    const router = useRouter();;
 
 
     
@@ -225,6 +228,16 @@ const sendHeight = () => {
       window.removeEventListener("resize", sendHeight);
     };
   }, []);
+
+
+  
+  useEffect(() => {
+    // Send height when the route changes
+    sendHeight(); // Send initial height on mount
+
+    window.addEventListener("resize", sendHeight);
+  }, [router]);
+
 
 
 
