@@ -164,7 +164,7 @@ function Home() {
             </Box> 
             {surveyCompleted && calculatedResults && (
                 <Box ref={resultsRef}>
-                    <ResultsTable results={calculatedResults} />
+                    {/* <ResultsTable results={calculatedResults} /> */}
                     <ThankYouPage />
                 </Box>
             )}
