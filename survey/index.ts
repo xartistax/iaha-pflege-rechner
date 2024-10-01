@@ -136,7 +136,8 @@ export interface SurveyJSONType {
     showCompletedPage: boolean
 	showQuestionNumbers: string
 	pageNextText : LanguageText,
-	completeText : LanguageText
+	completeText : LanguageText,
+	widthMode: string
 }
 
 export interface LanguageText {
@@ -807,5 +808,6 @@ export const surveyJson: SurveyJSONType = {
 	},
 	"completeText": {
 	  "de": "Berechnen"
-	}
+	},
+	"widthMode": "responsive"
   }
