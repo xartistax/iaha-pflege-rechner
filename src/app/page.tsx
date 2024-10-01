@@ -218,6 +218,11 @@ const sendHeight = () => {
     sendHeight();
   });
 
+  survey.onCurrentPageChanged.add(() => {
+    console.log("Page changed");
+    sendHeight(); // Send height adjustment on page change
+  });
+
   // Initial setup to send height on component mount and resize
   useEffect(() => {
     sendHeight(); // Send initial height on mount
